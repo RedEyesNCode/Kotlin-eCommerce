@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/myProfile"
+        android:title="View My Profile" />
+
+    <item
+        android:id="@+id/viewAddress"
+        android:title="View All Address" />
+    <item
+        android:id="@+id/tvTermsConditions"
+        android:title="Terms \u0026 Conditions" />
+    <item
+        android:id="@+id/tvPrivacyPolicy"
+        android:title="Privacy Policy" />
+</menu>

@@ -11,7 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:id="@+id/appBarLayout"
+            android:layout_height="wrap_content">
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
+                android:background="@color/purple_200"
+                app:subtitle="Let us know your needs"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/app_name"
+
+                app:menu="@menu/top_app_bar"
+                app:navigationIcon="@drawable/baseline_more_vert_24"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                />
+
+        </com.google.android.material.appbar.AppBarLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,10 +63,10 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tablayout"
-                android:layout_below="@id/banner_layout"
-                android:layout_centerInParent="true"
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="20dp"
+                android:layout_below="@id/banner_layout"
+                android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_3sdp"
                 app:tabBackground="@drawable/indicator_selector"
@@ -58,15 +76,6 @@
 
             <!--    visiblity = "gone"-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_all_sections"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/banner_layout"
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/_10sdp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/all_section_list_layout" />
 
             <!--////////////////////////////////////////////////////////////////-->
 
@@ -160,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:fontFamily="@font/lato_bold"
-                android:text="Top Sellers"
+                android:text="Top Categories"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/_15ssp" />
 
@@ -231,7 +240,9 @@
                 android:paddingHorizontal="@dimen/_10sdp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/all_popular_products_list" />
+
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
