@@ -3,7 +3,6 @@
     android:id="@+id/sellerDetailsLayout"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite"
     android:orientation="vertical"
     android:paddingRight="@dimen/_5sdp">
 
