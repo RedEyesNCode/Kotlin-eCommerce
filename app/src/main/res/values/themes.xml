@@ -13,4 +13,12 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="EditTextTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    </style>
+    <style name="EditTextOutLineStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/pink</item>
+        <item name="boxStrokeWidth">@dimen/_1sdp</item>
+        <item name="colorOnSurface">@color/pink</item>
+        <item name="colorPrimary">@color/pink</item>
+    </style>
 </resources>

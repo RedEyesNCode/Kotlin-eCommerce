@@ -50,4 +50,5 @@
     <color name="feed_grey_bg">#d1d1dd</color>
     <color name="bnk_name_bg">#f8f8f8</color>
     <color name="purple_line">#828ed5</color>
+    <color name="gray">#DDDDDD</color>
 </resources>
