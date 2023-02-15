@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/ic_splash_bg"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity">
+    tools:context=".utils.SplashActivity">
 
     <TextView
         android:layout_width="wrap_content"

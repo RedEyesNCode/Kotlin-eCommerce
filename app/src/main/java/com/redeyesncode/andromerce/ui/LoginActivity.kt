@@ -1,4 +1,4 @@
-package com.redeyesncode.andromerce
+package com.redeyesncode.andromerce.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -19,18 +19,15 @@ class LoginActivity : AppCompatActivity() {
 
     private fun isValidated():Boolean{
         return false
-
-
-
     }
 
     private fun initClicks() {
         binding.btnLogin.setOnClickListener {
-            startActivity(Intent(this,DashboardActivity::class.java))
+            startActivity(Intent(this, DashboardActivity::class.java))
             finish()
         }
         binding.callSignupLayout.setOnClickListener {
-            startActivity(Intent(this,SignupActivity::class.java))
+            startActivity(Intent(this, SignupActivity::class.java))
             finish()
         }
 

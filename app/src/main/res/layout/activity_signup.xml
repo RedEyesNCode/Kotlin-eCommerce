@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/ic_splash_bg"
     android:orientation="vertical"
-    tools:context=".SignupActivity">
+    tools:context=".ui.SignupActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:background="@drawable/background_edit_text"
@@ -250,7 +250,6 @@
                 android:id="@+id/testZipcode"
                 android:gravity="center"
                 android:textSize="@dimen/_11sdp"
-                android:text="@string/by_clicking_on_login_button_you_will_agree_to_our"
                 android:textColor="@color/black" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -262,16 +261,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
-                    android:text="@string/terms_u0026_conditions"
                     android:layout_marginBottom="@dimen/_4sdp"
                     android:id="@+id/termsLayout"
-                    android:textColor="@color/bluetheme" />
+                    android:textColor="@color/pink" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_marginHorizontal="@dimen/_4sdp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
-                    android:text="@string/and"
                     android:layout_marginBottom="@dimen/_4sdp"
                     android:textColor="@color/black" />
                 <TextView
@@ -279,9 +276,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvPolicy"
                     android:fontFamily="@font/lato_bold"
-                    android:text="@string/privacy_policy"
                     android:layout_marginBottom="@dimen/_4sdp"
-                    android:textColor="@color/bluetheme" />
+                    android:textColor="@color/pink" />
 
             </LinearLayout>
             <!--<TextView
