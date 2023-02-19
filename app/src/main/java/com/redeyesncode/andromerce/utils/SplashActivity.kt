@@ -12,7 +12,9 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         Handler().postDelayed(Runnable {
-            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+            var intentLogin =Intent(this@SplashActivity, LoginActivity::class.java)
+            intentLogin.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intentLogin)
 
         },2000)
 

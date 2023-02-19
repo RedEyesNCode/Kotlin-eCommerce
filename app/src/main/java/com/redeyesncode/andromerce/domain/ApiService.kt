@@ -4,6 +4,7 @@ import com.redeyesncode.andromerce.base.CommonResponseModel
 import com.redeyesncode.andromerce.data.*
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
@@ -20,19 +21,33 @@ interface ApiService {
     fun getUserAddress(@Body hashMap:HashMap<String,String>):Call<UserAddressResponseModel>
 
 
-    @POST("merce/user/getAllProducts")
+    @POST("merce/product/getAllProducts")
     fun getAllProducts():Call<GetAllProductsResponseModel>
 
 
-    @POST("merce/user/getAllCategory")
+    @GET("merce/product/getAllCategory")
     fun getAllCategory():Call<CategoryResponseModel>
 
-    @POST("merce/user/getProductsByCategory")
+    @GET("merce/product/getAllBanners")
+    fun getAllBanners():Call<BannersResponseModel>
+
+    @GET("merce/product/getAllSubCategory")
+    fun getAllSubCategory():Call<AllSubCategoryResponse>
+
+
+    @POST("merce/product/getProductDetail")
+    fun getProductDetail(hashMap: HashMap<String, String>):Call<ProductDetailResponseModel>
+
+    @POST("merce/product/getProductImages")
+    fun getProductImage( hashMap: HashMap<String, String>):Call<ProductImagesResponse>
+
+
+    @POST("merce/product/getProductsByCategory")
     fun getProductsByCategory():Call<CategoryProductsResponse>
 
 
 
-    @POST("merce/user/getProductDetail")
+    @POST("merce/product/getProductDetail")
     fun getProductDetails():Call<ProductDetailResponseModel>
 
 

@@ -33,7 +33,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitXY"
                         app:riv_corner_radius="@dimen/_4sdp"
-                        android:src="@drawable/product_view">
+                        android:src="@drawable/ic_placeholder">
 
                     </com.makeramen.roundedimageview.RoundedImageView>
                 </LinearLayout>
@@ -51,7 +51,7 @@
                         android:scaleType="fitXY"
                         app:riv_corner_radius="@dimen/_4sdp"
                         android:layout_weight="1"
-                        android:src="@drawable/product_view">
+                        android:src="@drawable/ic_placeholder">
 
                     </com.makeramen.roundedimageview.RoundedImageView>
                     <com.makeramen.roundedimageview.RoundedImageView
@@ -63,7 +63,7 @@
                         app:riv_corner_radius="@dimen/_4sdp"
 
                         android:layout_weight="1"
-                        android:src="@drawable/product_view">
+                        android:src="@drawable/ic_placeholder">
                     </com.makeramen.roundedimageview.RoundedImageView>
                 </LinearLayout>
             </LinearLayout>
@@ -177,7 +177,8 @@
                         android:fontFamily="@font/lato_bold"
                         android:gravity="center_vertical"
                         android:alpha="0.5"
-                        android:text="18 % GST Incl."
+                        android:text=""
+                        android:id="@+id/tvDescription"
                         android:paddingTop="@dimen/_2sdp"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_8sdp">
@@ -618,6 +619,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
+                    android:visibility="gone"
                     android:layout_marginLeft="@dimen/_4sdp"
                     android:layout_weight="1"
                     android:background="@drawable/background_button_pink"
@@ -636,7 +638,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/btn_editListing"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_weight="1"

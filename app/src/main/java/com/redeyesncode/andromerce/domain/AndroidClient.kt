@@ -7,7 +7,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class AndroidClient {
-    val BASE_URL = "http://13.235.156.27:4575/" // When running in the local host.
+//    val BASE_URL = "http://13.235.156.27:4575/" // When running in the local host.
+    val BASE_URL = "http://192.168.43.247:4575/" // When running in the local host.
 
 
     val retrofitClient: Retrofit.Builder by lazy {

@@ -8,7 +8,8 @@ data class CategoryResponseModel(  @SerializedName("data" ) var data : ArrayList
 
         @SerializedName("id"          ) var id          : Int?    = null,
         @SerializedName("name"        ) var name        : String? = null,
-        @SerializedName("description" ) var description : String? = null
+        @SerializedName("description" ) var description : String? = null,
+        @SerializedName("image" ) var image : String? = null
 
     )
 }
