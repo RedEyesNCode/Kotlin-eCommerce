@@ -36,10 +36,10 @@ interface ApiService {
 
 
     @POST("merce/product/getProductDetail")
-    fun getProductDetail(hashMap: HashMap<String, String>):Call<ProductDetailResponseModel>
+    fun getProductDetail(@Body hashMap: HashMap<String, String>):Call<ProductDetailResponseModel>
 
     @POST("merce/product/getProductImages")
-    fun getProductImage( hashMap: HashMap<String, String>):Call<ProductImagesResponse>
+    fun getProductImage(@Body hashMap: HashMap<String, String>):Call<ProductImagesResponse>
 
 
     @POST("merce/product/getProductsByCategory")
@@ -47,8 +47,6 @@ interface ApiService {
 
 
 
-    @POST("merce/product/getProductDetail")
-    fun getProductDetails():Call<ProductDetailResponseModel>
 
     @GET("merce/product/getPopularProducts")
     fun getPopularProducts():Call<PopularProductResponse>

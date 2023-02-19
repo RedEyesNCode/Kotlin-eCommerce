@@ -1,5 +1,6 @@
 package com.redeyesncode.andromerce.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
@@ -18,11 +19,18 @@ import com.redeyesncode.andromerce.ui.adapters.CategoryAdapter
 import com.redeyesncode.andromerce.ui.adapters.PopularProductAdapter
 import com.redeyesncode.andromerce.ui.adapters.SubCategoryAdapter
 
-class DashboardActivity : BaseActivity() {
+class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
 
     private lateinit var binding:ActivityDashboardBinding
     private lateinit var dashboardViewModel:DashboardViewModel
 
+    override fun onClickProduct(position: Int, productId: Int) {
+        val productDetailIntent = Intent(this@DashboardActivity,ProductDetailActivity::class.java)
+        productDetailIntent.putExtra("PRODUCT_ID",productId.toString())
+        startActivity(productDetailIntent)
+
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +42,7 @@ class DashboardActivity : BaseActivity() {
     }
 
     private fun initialApiCalls() {
+        showLoader()
         dashboardViewModel.getAllCategory()
         dashboardViewModel.getAllBanners()
         dashboardViewModel.getAllPopularProducts()
@@ -121,7 +130,7 @@ class DashboardActivity : BaseActivity() {
     }
 
     private fun setupPopularProductsAdapter(it: PopularProductResponse?) {
-        binding.rvPopularProducts.adapter = PopularProductAdapter(this,it!!)
+        binding.rvPopularProducts.adapter = PopularProductAdapter(this,it!!,this)
         binding.rvPopularProducts.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
 
     }

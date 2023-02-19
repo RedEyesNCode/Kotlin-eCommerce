@@ -3,8 +3,8 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
     <color name="colorAccent">#fb8d9c</color>
-    <color name="pink">#fb8d9c</color>
-    <color name="lightPink">#fed7dd</color>
+    <color name="pink">#FFBB86FC</color>
+    <color name="lightPink">#E6D2FF</color>
     <color name="menu_pink">#9EFB8D9C</color>
     <color name="colorBlack">#FF000000</color>
     <color name="colorWhite">#FFFFFFFF</color>

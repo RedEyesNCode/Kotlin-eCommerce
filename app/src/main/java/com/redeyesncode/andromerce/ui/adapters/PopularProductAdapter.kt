@@ -9,7 +9,7 @@ import com.redeyesncode.andromerce.R
 import com.redeyesncode.andromerce.data.PopularProductResponse
 import com.redeyesncode.andromerce.databinding.AllPopularProductsListBinding
 
-class PopularProductAdapter (var context: Context,var popularProductResponse: PopularProductResponse):RecyclerView.Adapter<PopularProductAdapter.MYViewHolder>(){
+class PopularProductAdapter (var context: Context,var popularProductResponse: PopularProductResponse,var onEventActivity:onEvent):RecyclerView.Adapter<PopularProductAdapter.MYViewHolder>(){
 
     lateinit var binding: AllPopularProductsListBinding
 
@@ -35,6 +35,16 @@ class PopularProductAdapter (var context: Context,var popularProductResponse: Po
         }catch (e:java.lang.Exception){
             Glide.with(context).load(R.drawable.ic_placeholder).into(holder.binding.imagePopularItem)
         }
+
+        holder.binding.popularProductClick.setOnClickListener {
+            data.productTable?.id?.let { it1 -> onEventActivity.onClickProduct(position, it1) }
+        }
+
+
+    }
+
+    public interface onEvent{
+        fun onClickProduct(position:Int,productId:Int)
 
 
     }

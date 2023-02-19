@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AndroMerce</string>
     <string name="product_description">Product Description</string>
     <string name="place_order">Place Order</string>
 </resources>
