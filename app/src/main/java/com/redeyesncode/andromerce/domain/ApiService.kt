@@ -50,6 +50,8 @@ interface ApiService {
     @POST("merce/product/getProductDetail")
     fun getProductDetails():Call<ProductDetailResponseModel>
 
+    @GET("merce/product/getPopularProducts")
+    fun getPopularProducts():Call<PopularProductResponse>
 
     @POST("merce/orders/place-order")
     fun  getAddressDetails(@Body orderPlaceBody:OrderPlaceBody):Call<CommonResponseModel>

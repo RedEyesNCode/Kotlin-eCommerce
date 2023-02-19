@@ -13,5 +13,7 @@ class MainRepository {
 
     suspend fun getAllBanners() = AndroidClient().apiInterface.getAllBanners()
     suspend fun getAllProductImages(hashMap: HashMap<String, String>) = AndroidClient().apiInterface.getProductImage(hashMap)
+
+    suspend fun getAllPopularProducts() = AndroidClient().apiInterface.getPopularProducts()
     suspend  fun getProductDetail(hashMap: java.util.HashMap<String,String>) = AndroidClient().apiInterface.getProductDetail(hashMap)
 }

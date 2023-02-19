@@ -7,12 +7,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.redeyesncode.andromerce.R
 import com.redeyesncode.andromerce.base.BaseActivity
+import com.redeyesncode.andromerce.data.AllSubCategoryResponse
 import com.redeyesncode.andromerce.data.BannersResponseModel
 import com.redeyesncode.andromerce.data.CategoryResponseModel
+import com.redeyesncode.andromerce.data.PopularProductResponse
 import com.redeyesncode.andromerce.databinding.ActivityDashboardBinding
 import com.redeyesncode.andromerce.presentation.DashboardViewModel
 import com.redeyesncode.andromerce.ui.adapters.BannerViewPager
 import com.redeyesncode.andromerce.ui.adapters.CategoryAdapter
+import com.redeyesncode.andromerce.ui.adapters.PopularProductAdapter
+import com.redeyesncode.andromerce.ui.adapters.SubCategoryAdapter
 
 class DashboardActivity : BaseActivity() {
 
@@ -32,6 +36,8 @@ class DashboardActivity : BaseActivity() {
     private fun initialApiCalls() {
         dashboardViewModel.getAllCategory()
         dashboardViewModel.getAllBanners()
+        dashboardViewModel.getAllPopularProducts()
+        dashboardViewModel.getAllSubCategory()
 
     }
 
@@ -80,8 +86,43 @@ class DashboardActivity : BaseActivity() {
             }
 
         }
+        dashboardViewModel.popularProductResponse.observe((this)){
+
+            hideLoader()
+            //setup the adapter for category
+            if(it.data.isEmpty()){
+                showToast("Products not found !")
+            }else{
+                setupPopularProductsAdapter(it)
+
+            }
+
+        }
+        dashboardViewModel.subCategoryResponseModel.observe((this)){
+
+            hideLoader()
+            if(it.data.isEmpty()){
+                showToast("Products not found !")
+            }else{
+                setupOtherCategoryAdapter(it)
+
+            }
 
 
+        }
+
+
+
+    }
+
+    private fun setupOtherCategoryAdapter(it: AllSubCategoryResponse?) {
+        binding.rvSubCategory.adapter = SubCategoryAdapter(this@DashboardActivity, it!!)
+        binding.rvSubCategory.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+    }
+
+    private fun setupPopularProductsAdapter(it: PopularProductResponse?) {
+        binding.rvPopularProducts.adapter = PopularProductAdapter(this,it!!)
+        binding.rvPopularProducts.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
 
     }
 

@@ -6,10 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redeyesncode.andromerce.base.CommonResponseModel
-import com.redeyesncode.andromerce.data.AllSubCategoryResponse
-import com.redeyesncode.andromerce.data.BannersResponseModel
-import com.redeyesncode.andromerce.data.CategoryResponseModel
-import com.redeyesncode.andromerce.data.GetAllProductsResponseModel
+import com.redeyesncode.andromerce.data.*
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,6 +31,11 @@ class DashboardViewModel(): ViewModel() {
     private val _subCateogryResponseModel = MutableLiveData<AllSubCategoryResponse>()
     val subCategoryResponseModel :LiveData<AllSubCategoryResponse> = _subCateogryResponseModel
 
+    private val _popularProductsResponseModel = MutableLiveData<PopularProductResponse> ()
+
+    val popularProductResponse :LiveData<PopularProductResponse> = _popularProductsResponseModel;
+
+
 
 
 
@@ -47,6 +49,51 @@ class DashboardViewModel(): ViewModel() {
 
 
 
+    fun getAllPopularProducts() = viewModelScope.launch {
+
+        getAllPopularCouroutine()
+    }
+
+    private suspend fun getAllPopularCouroutine() {
+        try {
+
+            val response = mainRepo.getAllPopularProducts()
+            _isLoading.value = true
+            response.enqueue(object : Callback<PopularProductResponse> {
+
+                override fun onResponse(
+                    call: Call<PopularProductResponse>,
+                    response: Response<PopularProductResponse>
+                ) {
+                    _isLoading.value = false
+                    if (response.code() == 200) {
+                        _popularProductsResponseModel.postValue(response.body())
+                    } else {
+                        _isFailed.value = "Record Not Found !."
+                    }
+                }
+
+                override fun onFailure(call: Call<PopularProductResponse>, t: Throwable) {
+                    _isFailed.value = t.message
+                }
+            })
+        } catch (t: Throwable) {
+
+            when (t) {
+                is IOException -> {
+                    _isFailed.value = "IO Exception"
+                }
+                else -> {
+                    _isFailed.value = "Exception." + t.message
+
+                    Log.i("RETROFIT", t.message!!)
+                }
+
+
+            }
+
+        }
+    }
 
 
     fun getAllSubCategory() = viewModelScope.launch {
