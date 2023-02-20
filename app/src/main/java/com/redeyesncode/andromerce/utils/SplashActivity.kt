@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.google.firebase.FirebaseApp
 import com.redeyesncode.andromerce.R
 import com.redeyesncode.andromerce.ui.LoginActivity
 

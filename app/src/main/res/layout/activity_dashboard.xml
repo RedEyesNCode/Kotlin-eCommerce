@@ -45,12 +45,14 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:id="@+id/banner_layout"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_140sdp"
@@ -305,7 +307,6 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/row_top_seller" />
                 </RelativeLayout>
-
 
             </TableLayout>
 

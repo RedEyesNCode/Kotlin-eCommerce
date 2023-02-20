@@ -1,5 +1,6 @@
 package com.redeyesncode.andromerce.presentation
 
+import com.redeyesncode.andromerce.data.SignupUserBody
 import com.redeyesncode.andromerce.domain.AndroidClient
 import java.util.HashMap
 
@@ -16,4 +17,8 @@ class MainRepository {
 
     suspend fun getAllPopularProducts() = AndroidClient().apiInterface.getPopularProducts()
     suspend  fun getProductDetail(hashMap: java.util.HashMap<String,String>) = AndroidClient().apiInterface.getProductDetail(hashMap)
+
+
+    suspend fun signupUser(signupUserBody: SignupUserBody) = AndroidClient().apiInterface.signupUser(signupUserBody)
+
 }
