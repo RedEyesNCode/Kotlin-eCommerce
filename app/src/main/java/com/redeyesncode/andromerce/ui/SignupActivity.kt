@@ -1,9 +1,10 @@
 package com.redeyesncode.andromerce.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -16,16 +17,28 @@ import com.redeyesncode.andromerce.R
 import com.redeyesncode.andromerce.base.BaseActivity
 import com.redeyesncode.andromerce.data.SignupUserBody
 import com.redeyesncode.andromerce.databinding.ActivitySignupBinding
+import com.redeyesncode.andromerce.databinding.BottomSheetOtpBinding
 import com.redeyesncode.andromerce.presentation.SignupViewModel
+import com.redeyesncode.andromerce.utils.CustomEditTextWithButton
 import java.util.concurrent.TimeUnit
 
-class SignupActivity : BaseActivity() {
+class SignupActivity : BaseActivity(),CustomEditTextWithButton.onEvent {
 
     lateinit var binding:ActivitySignupBinding
     lateinit var signUpViewModel:SignupViewModel
     var storedVerificationId = ""
     var resendToken =""
     lateinit var auth:FirebaseAuth
+    lateinit var bottomSheetDialog:BottomSheetDialog
+    override fun onVerifyOtpClick(enteredOtp: String?) {
+        val credential = PhoneAuthProvider.getCredential(storedVerificationId,
+            enteredOtp.toString()
+        )
+        showLoader()
+        signInWithPhoneAuthCredential(credential)
+
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +57,7 @@ class SignupActivity : BaseActivity() {
             if(isValidated()){
                 showLoader()
 //                signUpViewModel.signupUser(getSignupBody())
+                // First verify number from firebase then send Data to server.
                 verifyNumberFromFirebase("+91"+binding.edtPhoneNumber.text.toString().trim())
             }
         }
@@ -74,10 +88,6 @@ class SignupActivity : BaseActivity() {
             binding.edtConfirmPassword.setError("Pleae enter password again")
             return false
 
-        }else if(binding.edtPassword.text.toString().equals(binding.edtConfirmPassword.text.toString())){
-            showToast("Password do not match")
-            return false
-
         }else {
             return true
         }
@@ -103,10 +113,28 @@ class SignupActivity : BaseActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = task.result?.user
+                    hideLoader()
+                    if(bottomSheetDialog.isShowing){
+                        bottomSheetDialog.dismiss()
+                    }
+                    if(task.isSuccessful){
+                        showToast("Otp Verified Successfully !")
+                        // Moving to next dashboard with userId in the session.
+                        signUpViewModel.signupUser(getSignupBody())
+
+
+
+                    }
+
                 } else {
                     // Sign in failed, display a message and update the UI
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
+                        hideLoader()
+                        if(bottomSheetDialog.isShowing){
+                            bottomSheetDialog.dismiss()
+                        }
+                        showToast(task.exception.toString())
                     }
                     // Update UI
                 }
@@ -132,8 +160,14 @@ class SignupActivity : BaseActivity() {
 
             if (e is FirebaseAuthInvalidCredentialsException) {
                 // Invalid request
+
+                showDialogImportantAlert(e.toString())
+
             } else if (e is FirebaseTooManyRequestsException) {
                 // The SMS quota for the project has been exceeded
+                showToast(e.toString())
+
+
             }
 
             // Show a message and update the UI
@@ -151,7 +185,28 @@ class SignupActivity : BaseActivity() {
             // Save verification ID and resending token so we can use them later
             storedVerificationId = verificationId
             resendToken = token.toString()
+            // show the bottom Sheet for OTP verification.
+            hideLoader()
+
+            showBottomSheetOtp(storedVerificationId,token)
+
         }
+    }
+
+    private fun showBottomSheetOtp(
+        storedVerificationId: String,
+        token: PhoneAuthProvider.ForceResendingToken
+    ) {
+        val bottomSheetBinding = BottomSheetOtpBinding.inflate(LayoutInflater.from(this@SignupActivity))
+        bottomSheetDialog = BottomSheetDialog(this,R.style.BottomSheetDialogTheme)
+        bottomSheetDialog.setContentView(bottomSheetBinding.root)
+        bottomSheetDialog.show()
+        bottomSheetBinding.btnCustomEditText.setOnVerifyButtonClickListener(this)
+
+
+
+
+
     }
 
 
@@ -160,7 +215,7 @@ class SignupActivity : BaseActivity() {
         signupUserBody.lastName = binding.edtName.text.toString().trim()
         signupUserBody.firstName = binding.edtName.text.toString().trim()
 
-        signupUserBody.isVerified = false
+        signupUserBody.isVerified = true
         signupUserBody.telephone = binding.edtPhoneNumber.text.toString().trim()
         signupUserBody.password = binding.edtPassword.text.toString().trim()
         signupUserBody.email = binding.edtEmail.text.toString().trim()

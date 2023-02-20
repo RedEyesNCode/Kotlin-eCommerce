@@ -39,7 +39,8 @@
     <color name="green">#16a704</color>
     <color name="gray_view_line">#d7d7d7</color>
     <color name="tv_lite_black">#333333</color>
-
+    <color name="green_light">#98CE44</color>
+    <color name="green_lightest">#EBFAE9</color>
     <!--SellerappColours-->
     <!--EXTRA ADDED COLOURS-->
 

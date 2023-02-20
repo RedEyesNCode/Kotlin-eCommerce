@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/bottom_sheet_background"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="@dimen/_10sdp"
+
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/verify_mobile_number"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="@dimen/_15sdp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:text="@string/we_have_sent_otp_to_entered_number_please_check"
+            android:textColor="@color/black"
+            android:fontFamily="@font/lato_regular"
+            android:textSize="@dimen/_10sdp"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+
+
+
+
+        <com.redeyesncode.andromerce.utils.CustomEditTextWithButton
+            android:layout_width="match_parent"
+            android:id="@+id/btnCustomEditText"
+            android:layout_height="wrap_content"/>
+
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

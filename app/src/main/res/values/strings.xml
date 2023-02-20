@@ -2,4 +2,6 @@
     <string name="app_name">AndroMerce</string>
     <string name="product_description">Product Description</string>
     <string name="place_order">Place Order</string>
+    <string name="verify_mobile_number">Verify Mobile Number</string>
+    <string name="we_have_sent_otp_to_entered_number_please_check">We have sent OTP to the entered number Please check,.</string>
 </resources>
