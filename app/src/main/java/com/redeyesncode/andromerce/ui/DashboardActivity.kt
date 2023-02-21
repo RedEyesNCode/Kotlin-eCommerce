@@ -2,14 +2,16 @@ package com.redeyesncode.andromerce.ui
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.redeyesncode.andromerce.R
 import com.redeyesncode.andromerce.base.BaseActivity
 import com.redeyesncode.andromerce.data.AllSubCategoryResponse
@@ -17,6 +19,7 @@ import com.redeyesncode.andromerce.data.BannersResponseModel
 import com.redeyesncode.andromerce.data.CategoryResponseModel
 import com.redeyesncode.andromerce.data.PopularProductResponse
 import com.redeyesncode.andromerce.databinding.ActivityDashboardBinding
+import com.redeyesncode.andromerce.databinding.BottomSheetLogoutBinding
 import com.redeyesncode.andromerce.presentation.DashboardViewModel
 import com.redeyesncode.andromerce.ui.adapters.BannerViewPager
 import com.redeyesncode.andromerce.ui.adapters.CategoryAdapter
@@ -33,8 +36,6 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
         val productDetailIntent = Intent(this@DashboardActivity,ProductDetailActivity::class.java)
         productDetailIntent.putExtra("PRODUCT_ID",productId.toString())
         startActivity(productDetailIntent)
-
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,8 +51,51 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
     private fun initClicks() {
         binding.topAppBar.setNavigationOnClickListener {
             showPopupMenu(it)
+        }
+        binding.topAppBar.setOnMenuItemClickListener(androidx.appcompat.widget.Toolbar.OnMenuItemClickListener { item: MenuItem? ->
+
+            when (item!!.itemId) {
+                R.id.logoutMenu -> {
+
+                    showBottomSheetLogout()
+                }
+                R.id.tvTermsConditions -> {
+                    val url = getString(R.string.TERMS)
+                    val i = Intent(Intent.ACTION_VIEW)
+                    i.data = Uri.parse(url)
+                    startActivity(i)
+                }
+                R.id.tvPrivacyPolicy -> {
+                    val url = getString(R.string.PRIVACY)
+                    val i = Intent(Intent.ACTION_VIEW)
+                    i.data = Uri.parse(url)
+                    startActivity(i)
+                }
+            }
+
+            true
+        })
+    }
+
+    private fun showBottomSheetLogout() {
+        val bottomSheetLogoutBinding = BottomSheetLogoutBinding.inflate(LayoutInflater.from(this@DashboardActivity))
+        val bottomSheetDialog = BottomSheetDialog(this@DashboardActivity,R.style.BottomSheetDialogTheme)
+        bottomSheetDialog.setContentView(bottomSheetLogoutBinding.root)
+        bottomSheetLogoutBinding.btnLogout.setOnClickListener {
+            AppSession(this@DashboardActivity).clear()
+            val intentDashboard =Intent(this@DashboardActivity, LoginActivity::class.java)
+            intentDashboard.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intentDashboard)
+            showToast("Logged Out !")
 
         }
+        bottomSheetLogoutBinding.btnCancel.setOnClickListener {
+            bottomSheetDialog.dismiss()
+        }
+        bottomSheetDialog.show()
+
+
+
 
 
     }
@@ -62,27 +106,8 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
         // Inflating popup menu from popup_menu.xml file
 
         // Inflating popup menu from popup_menu.xml file
-        popupMenu.getMenuInflater().inflate(com.redeyesncode.andromerce.R.menu.top_bar_menu_items, popupMenu.getMenu())
-        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
-            override fun onMenuItemClick(menuItem: MenuItem): Boolean {
-                if(menuItem.itemId==R.id.tvLogout){
+        popupMenu.getMenuInflater().inflate(R.menu.top_bar_menu_items, popupMenu.getMenu())
 
-                    val intentDashboard =Intent(this@DashboardActivity, LoginActivity::class.java)
-                    intentDashboard.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intentDashboard)
-                    AppSession(this@DashboardActivity).clear()
-                    return true
-
-                // Toast message on menu item clicked
-
-                }else{
-                    return true
-
-                }
-
-
-            }
-        })
         // Showing the popup menu
         // Showing the popup menu
         popupMenu.show()

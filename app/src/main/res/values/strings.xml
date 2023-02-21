@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndroMerce</string>
+    <string name="app_name">ChicCart</string>
     <string name="product_description">Product Description</string>
     <string name="place_order">Place Order</string>
     <string name="verify_mobile_number">Verify Mobile Number</string>
@@ -9,4 +9,6 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="view_addresses">View Addresses</string>
     <string name="logout">Logout</string>
+    <string name="PRIVACY">https://www.termsfeed.com/live/c3a16c43-1c65-47af-8b2b-ef8c22fb9abb</string>
+    <string name="TERMS">https://www.termsfeed.com/live/d6b147e4-95e4-4984-997f-864ec1cf7939</string>
 </resources>

@@ -48,9 +48,9 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/lato_bold"
                             android:paddingBottom="@dimen/_8sdp"
-                            android:text="Andro"
+                            android:text="Chic"
 
-                            android:textColor="@color/red"
+                            android:textColor="@color/pink"
                             android:textSize="@dimen/_38sdp" />
 
                         <TextView
@@ -58,8 +58,8 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/lato_bold"
                             android:paddingBottom="@dimen/_8sdp"
-                            android:text="Merce"
-                            android:textColor="#00EF1D"
+                            android:text="Cart"
+                            android:textColor="@color/grey"
                             android:textSize="@dimen/_38sdp" />
                     </LinearLayout>
 

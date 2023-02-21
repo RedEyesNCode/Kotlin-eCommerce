@@ -2,18 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/myProfile"
+        android:enabled="true"
         android:title="@string/my_profile" />
 
     <item
         android:id="@+id/viewAddress"
+        android:enabled="true"
+
         android:title="@string/view_addresses" />
     <item
         android:id="@+id/tvTermsConditions"
+        android:enabled="true"
+
         android:title="@string/terms_u0026_conditions" />
     <item
         android:id="@+id/tvPrivacyPolicy"
+        android:enabled="true"
+
         android:title="@string/privacy_policy" />
     <item
-        android:id="@+id/tvLogout"
+        android:id="@+id/logoutMenu"
+        android:enabled="true"
+
         android:title="@string/logout" />
 </menu>
