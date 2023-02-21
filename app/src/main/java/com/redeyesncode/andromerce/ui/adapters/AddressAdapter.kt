@@ -26,6 +26,7 @@ class AddressAdapter(var context: Context,var onEventAct:onEventAddress,var data
         holder.binding.tvCity.text = "City : "+data.get(position).city
         holder.binding.tvPostalCode.text = "Postal Code : "+data.get(position).postalCode
 
+
         holder.binding.tvMobileNumber.text = "Mobile Number : "+data.get(position).telephone
 
 

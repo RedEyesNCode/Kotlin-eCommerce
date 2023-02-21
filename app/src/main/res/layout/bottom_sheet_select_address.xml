@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/bottom_sheet_background"
+
+    android:layout_height="match_parent">
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/recvAddress"
+        tools:itemCount="4"
+        tools:listitem="@layout/address_item"
+        android:layout_height="wrap_content"/>
+
+    <com.redeyesncode.andromerce.utils.customviews.CustomButtonProgressBar
+        android:layout_width="match_parent"
+        android:id="@+id/btnPlaceOrder"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

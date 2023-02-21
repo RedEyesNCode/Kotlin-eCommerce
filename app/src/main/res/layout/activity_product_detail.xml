@@ -205,7 +205,7 @@
                 android:layout_marginTop="@dimen/_45sdp"
                 android:orientation="horizontal">
                 <LinearLayout
-                    android:id="@+id/btn_editListing"
+                    android:id="@+id/btnPlaceOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="@dimen/_3sdp"
