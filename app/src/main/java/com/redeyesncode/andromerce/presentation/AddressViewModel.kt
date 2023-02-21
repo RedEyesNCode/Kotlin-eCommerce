@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redeyesncode.andromerce.base.CommonResponseModel
+import com.redeyesncode.andromerce.data.AddAddressBody
 import com.redeyesncode.andromerce.data.PopularProductResponse
 import com.redeyesncode.andromerce.data.UpdateAddressBody
 import com.redeyesncode.andromerce.data.UserAddressResponseModel
@@ -31,6 +32,57 @@ class AddressViewModel():ViewModel() {
 
 
     var mainRepo: MainRepository = MainRepository()
+
+
+    fun addAddress(addAddressBody: AddAddressBody) = viewModelScope.launch {
+        addAddressCouroutine(addAddressBody)
+
+
+    }
+
+    private suspend fun addAddressCouroutine(addAddressBody: AddAddressBody) {
+        try {
+
+            val response = mainRepo.addAddress(addAddressBody)
+            _isLoading.value = true
+            response.enqueue(object : Callback<CommonResponseModel> {
+
+                override fun onResponse(
+                    call: Call<CommonResponseModel>,
+                    response: Response<CommonResponseModel>
+                ) {
+                    _isLoading.value = false
+                    if (response.code() == 200) {
+                        _commonStatusResponse.postValue(response.body())
+                    } else {
+                        _isFailed.value = "Record Not Found !."
+                    }
+                }
+
+                override fun onFailure(call: Call<CommonResponseModel>, t: Throwable) {
+                    _isFailed.value = t.message
+                }
+            })
+        } catch (t: Throwable) {
+
+            when (t) {
+                is IOException -> {
+                    _isFailed.value = "IO Exception"
+                }
+                else -> {
+                    _isFailed.value = "Exception." + t.message
+
+                    Log.i("RETROFIT", t.message!!)
+                }
+
+
+            }
+
+        }
+
+
+    }
+
 
     fun deleteAddress(hashMap: HashMap<String, String>) = viewModelScope.launch {
         deleteAddressCouroutine(hashMap)

@@ -1,5 +1,6 @@
 package com.redeyesncode.andromerce.presentation
 
+import com.redeyesncode.andromerce.data.AddAddressBody
 import com.redeyesncode.andromerce.data.SignupUserBody
 import com.redeyesncode.andromerce.data.UpdateAddressBody
 import com.redeyesncode.andromerce.domain.AndroidClient
@@ -34,5 +35,5 @@ class MainRepository {
     suspend fun updateUserAddress( updateAddressBody : UpdateAddressBody) = AndroidClient().apiInterface.updateUserAddress(updateAddressBody)
 
     suspend fun deleteUserAddress(hashMap: HashMap<String, String>) = AndroidClient().apiInterface.deleteAddress(hashMap)
-
+    suspend fun addAddress(addAddressBody: AddAddressBody) = AndroidClient().apiInterface.addUserAddrress(addAddressBody)
 }

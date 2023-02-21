@@ -33,6 +33,13 @@ class AddressAdapter(var context: Context,var onEventAct:onEventAddress,var data
             onEventAct.onDeleteClick(position, data.get(position).id!!)
         }
 
+        holder.binding.ivEdit.setOnClickListener {
+
+            onEventAct.onEditClick(position,data.get(position))
+
+
+        }
+
 
 
 
