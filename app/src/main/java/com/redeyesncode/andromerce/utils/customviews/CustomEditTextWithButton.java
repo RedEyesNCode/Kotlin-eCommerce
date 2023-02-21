@@ -1,4 +1,4 @@
-package com.redeyesncode.andromerce.utils;
+package com.redeyesncode.andromerce.utils.customviews;
 
 import android.content.Context;
 import android.text.Editable;

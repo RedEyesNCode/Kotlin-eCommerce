@@ -150,19 +150,11 @@
                         android:text="Forgot password ?"
                         android:textColor="@color/black" />
 
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_login"
+                    <com.redeyesncode.andromerce.utils.customviews.CustomButtonProgressBar
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@drawable/background_button_pink"
-                        android:fontFamily="@font/lato_bold"
-                        android:paddingHorizontal="@dimen/_25sdp"
-                        android:paddingVertical="@dimen/_5sdp"
-                        android:text="Login"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14sdp" />
+                        android:id="@+id/btn_login"
+                        android:layout_height="wrap_content"/>
+
 
                     <TextView
                         android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package com.redeyesncode.andromerce.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import androidx.lifecycle.ViewModelProvider
 import com.redeyesncode.andromerce.base.BaseActivity
 import com.redeyesncode.andromerce.databinding.ActivityLoginBinding
@@ -29,6 +30,11 @@ class LoginActivity : BaseActivity() {
     private fun attachObservers() {
         loginViewModel.isFailed.observe((this)){
             hideLoader()
+            if(binding.btnLogin.isLoading){
+                binding.btnLogin.setTvButtonText("Login")
+                binding.btnLogin.hideProgress("Login")
+
+            }
             if(it!=null){
                 showToast(it)
             }
@@ -46,9 +52,14 @@ class LoginActivity : BaseActivity() {
             AppSession(this@LoginActivity).putObject(Constant.USER_INFO,it)
             AppSession(this@LoginActivity).put(Constant.IS_LOGGED_IN,true)
             //Move to dashboard
-            val intentDashboard =Intent(this@LoginActivity, DashboardActivity::class.java)
-            intentDashboard.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intentDashboard)
+            binding.btnLogin.showProgress("Please wait !")
+            Handler().postDelayed(Runnable {
+                val intentDashboard =Intent(this@LoginActivity, DashboardActivity::class.java)
+                intentDashboard.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intentDashboard)
+
+
+            },3500)
 
 
         }
@@ -81,17 +92,29 @@ class LoginActivity : BaseActivity() {
 
     private fun initClicks() {
         binding.btnLogin.setOnClickListener {
+
+
+
+        }
+        binding.btnLogin.setTvButtonText("Login")
+        binding.btnLogin.setOnClickListener {
             val loginHashMap = HashMap<String,String>()
             if(isValidated()){
+                binding.btnLogin.showProgress("Loading")
+
                 loginHashMap.put("email",binding.edtEmail.text.toString().trim())
                 loginHashMap.put("password",binding.edtPassword.text.toString().trim())
 //                showLoader()
                 loginViewModel.loginUser(loginHashMap)
 
+
+
             }
 
 
+
         }
+
         binding.callSignupLayout.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
             finish()

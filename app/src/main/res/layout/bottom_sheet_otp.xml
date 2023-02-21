@@ -39,7 +39,7 @@
 
 
 
-        <com.redeyesncode.andromerce.utils.CustomEditTextWithButton
+        <com.redeyesncode.andromerce.utils.customviews.CustomEditTextWithButton
             android:layout_width="match_parent"
             android:id="@+id/btnCustomEditText"
             android:layout_height="wrap_content"/>

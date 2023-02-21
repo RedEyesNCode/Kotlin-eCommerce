@@ -32,8 +32,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:title="@string/app_name"
 
-                app:menu="@menu/top_app_bar"
-                app:navigationIcon="@drawable/baseline_more_vert_24"
+                app:menu="@menu/top_bar_menu_items"
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 />
 

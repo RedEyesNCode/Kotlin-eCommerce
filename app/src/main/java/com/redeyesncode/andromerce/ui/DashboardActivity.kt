@@ -1,8 +1,12 @@
 package com.redeyesncode.andromerce.ui
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
+import android.widget.PopupMenu
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -18,6 +22,7 @@ import com.redeyesncode.andromerce.ui.adapters.BannerViewPager
 import com.redeyesncode.andromerce.ui.adapters.CategoryAdapter
 import com.redeyesncode.andromerce.ui.adapters.PopularProductAdapter
 import com.redeyesncode.andromerce.ui.adapters.SubCategoryAdapter
+import com.redeyesncode.andromerce.utils.AppSession
 
 class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
 
@@ -38,7 +43,49 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
         setupViewModel()
         attachObservers()
         initialApiCalls()
+        initClicks()
         setContentView(binding.root)
+    }
+
+    private fun initClicks() {
+        binding.topAppBar.setNavigationOnClickListener {
+            showPopupMenu(it)
+
+        }
+
+
+    }
+
+    private fun showPopupMenu(view: View) {
+        val popupMenu = PopupMenu(this@DashboardActivity, view)
+
+        // Inflating popup menu from popup_menu.xml file
+
+        // Inflating popup menu from popup_menu.xml file
+        popupMenu.getMenuInflater().inflate(com.redeyesncode.andromerce.R.menu.top_bar_menu_items, popupMenu.getMenu())
+        popupMenu.setOnMenuItemClickListener(object : PopupMenu.OnMenuItemClickListener {
+            override fun onMenuItemClick(menuItem: MenuItem): Boolean {
+                if(menuItem.itemId==R.id.tvLogout){
+
+                    val intentDashboard =Intent(this@DashboardActivity, LoginActivity::class.java)
+                    intentDashboard.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intentDashboard)
+                    AppSession(this@DashboardActivity).clear()
+                    return true
+
+                // Toast message on menu item clicked
+
+                }else{
+                    return true
+
+                }
+
+
+            }
+        })
+        // Showing the popup menu
+        // Showing the popup menu
+        popupMenu.show()
     }
 
     private fun initialApiCalls() {

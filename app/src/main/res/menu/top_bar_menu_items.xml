@@ -2,15 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/myProfile"
-        android:title="View My Profile" />
+        android:title="@string/my_profile" />
 
     <item
         android:id="@+id/viewAddress"
-        android:title="View All Address" />
+        android:title="@string/view_addresses" />
     <item
         android:id="@+id/tvTermsConditions"
-        android:title="Terms \u0026 Conditions" />
+        android:title="@string/terms_u0026_conditions" />
     <item
         android:id="@+id/tvPrivacyPolicy"
-        android:title="Privacy Policy" />
+        android:title="@string/privacy_policy" />
+    <item
+        android:id="@+id/tvLogout"
+        android:title="@string/logout" />
 </menu>

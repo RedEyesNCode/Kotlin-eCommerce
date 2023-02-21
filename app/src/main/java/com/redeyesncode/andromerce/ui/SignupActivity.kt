@@ -19,10 +19,11 @@ import com.redeyesncode.andromerce.data.SignupUserBody
 import com.redeyesncode.andromerce.databinding.ActivitySignupBinding
 import com.redeyesncode.andromerce.databinding.BottomSheetOtpBinding
 import com.redeyesncode.andromerce.presentation.SignupViewModel
-import com.redeyesncode.andromerce.utils.CustomEditTextWithButton
+import com.redeyesncode.andromerce.utils.customviews.CustomEditTextWithButton
 import java.util.concurrent.TimeUnit
 
-class SignupActivity : BaseActivity(),CustomEditTextWithButton.onEvent {
+class SignupActivity : BaseActivity(),
+    CustomEditTextWithButton.onEvent {
 
     lateinit var binding:ActivitySignupBinding
     lateinit var signUpViewModel:SignupViewModel
