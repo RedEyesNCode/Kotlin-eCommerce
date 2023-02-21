@@ -20,5 +20,12 @@ class MainRepository {
 
 
     suspend fun signupUser(signupUserBody: SignupUserBody) = AndroidClient().apiInterface.signupUser(signupUserBody)
+    suspend fun loginUser(hashMap: HashMap<String, String>) = AndroidClient().apiInterface.loginUserEmail(hashMap)
+
+    suspend fun forgotPassword(hashMap: HashMap<String, String>) = AndroidClient().apiInterface.forgotPassword(hashMap)
+
+    suspend fun checkUserByNumber(hashMap: HashMap<String, String>) = AndroidClient().apiInterface.checkUserByNumber(hashMap)
+
+
 
 }

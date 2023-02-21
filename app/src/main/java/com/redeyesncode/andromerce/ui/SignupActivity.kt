@@ -58,7 +58,14 @@ class SignupActivity : BaseActivity(),CustomEditTextWithButton.onEvent {
                 showLoader()
 //                signUpViewModel.signupUser(getSignupBody())
                 // First verify number from firebase then send Data to server.
-                verifyNumberFromFirebase("+91"+binding.edtPhoneNumber.text.toString().trim())
+
+                // First check the if user is already there with same number.
+                val hashMap = HashMap<String,String>()
+                hashMap.put("number",binding.edtPhoneNumber.text.toString().trim())
+                signUpViewModel.checkUserForOtp(hashMap)
+
+
+
             }
         }
         
@@ -244,10 +251,11 @@ class SignupActivity : BaseActivity(),CustomEditTextWithButton.onEvent {
             val signupIntent = Intent(this, DashboardActivity::class.java)
             signupIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(signupIntent)
-
-
-
-
+        }
+        signUpViewModel.commonResponseModelCheckUser.observe((this)){
+            hideLoader()
+            verifyNumberFromFirebase("+91"+binding.edtPhoneNumber.text.toString())
+            showToast("Sending Otp.")
 
         }
     }

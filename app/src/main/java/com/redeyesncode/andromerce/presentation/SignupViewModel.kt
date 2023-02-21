@@ -25,8 +25,65 @@ class SignupViewModel(): ViewModel() {
     val commonResponse :LiveData<CommonResponseModel> = _commonResponse
 
 
+    private val _commonResponseCheckUser = MutableLiveData<CommonResponseModel>()
+    val commonResponseModelCheckUser :LiveData<CommonResponseModel> = _commonResponseCheckUser
+
+
     var mainRepo: MainRepository = MainRepository()
 
+
+    fun checkUserForOtp(hashMap: HashMap<String,String>) = viewModelScope.launch {
+        checkUserOtpCoroutine(hashMap)
+
+    }
+
+    private suspend fun checkUserOtpCoroutine(hashMap: java.util.HashMap<String, String>) {
+        try {
+
+            val response = mainRepo.checkUserByNumber(hashMap)
+            _isLoading.value = true
+            response.enqueue(object : Callback<CommonResponseModel> {
+
+                override fun onResponse(
+                    call: Call<CommonResponseModel>,
+                    response: Response<CommonResponseModel>
+                ) {
+                    _isLoading.value = false
+                    if (response.code() == 200) {
+                        _commonResponseCheckUser.postValue(response.body())
+                    } else {
+                        if(response.code()==500){
+                            _isFailed.value = "User already exists try with different number."
+                        }else{
+                            _isFailed.value = "${Constant.OOPS_SW} ${response.code()}"
+
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<CommonResponseModel>, t: Throwable) {
+                    _isFailed.value = t.message
+                }
+            })
+        } catch (t: Throwable) {
+
+            when (t) {
+                is IOException -> {
+                    _isFailed.value = "IO Exception"
+                }
+                else -> {
+                    _isFailed.value = "Exception." + t.message
+
+                    Log.i("RETROFIT", t.message!!)
+                }
+
+
+            }
+
+        }
+
+
+    }
 
     fun signupUser(signupBody:SignupUserBody) = viewModelScope.launch {
         signupUserCoroutine(signupBody)

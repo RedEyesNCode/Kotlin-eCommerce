@@ -9,6 +9,16 @@ import retrofit2.http.POST
 
 interface ApiService {
 
+    
+    @POST("merce/user/loginUser")
+    fun loginUserEmail(@Body hashMap: HashMap<String, String>):Call<LoginUserResponse>
+
+
+    @POST("merce/user/checkUser")
+    fun checkUserByNumber(@Body hashMap: HashMap<String, String>):Call<CommonResponseModel>
+
+    @POST("merce/user/forgotPassword")
+    fun forgotPassword(@Body hashMap: HashMap<String, String>):Call<ForgotPasswordResponse>
 
     @POST("merce/user/signupUser")
     fun signupUser(@Body signupUserBody: SignupUserBody):Call<CommonResponseModel>
