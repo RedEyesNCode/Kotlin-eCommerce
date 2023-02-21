@@ -11,4 +11,5 @@
     <string name="logout">Logout</string>
     <string name="PRIVACY">https://www.termsfeed.com/live/c3a16c43-1c65-47af-8b2b-ef8c22fb9abb</string>
     <string name="TERMS">https://www.termsfeed.com/live/d6b147e4-95e4-4984-997f-864ec1cf7939</string>
+    <string name="address">Address</string>
 </resources>

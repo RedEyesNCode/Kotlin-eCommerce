@@ -57,29 +57,25 @@ class LoginActivity : BaseActivity() {
                 val intentDashboard =Intent(this@LoginActivity, DashboardActivity::class.java)
                 intentDashboard.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intentDashboard)
-
-
             },3500)
-
-
         }
-
     }
 
     private fun setupViewModel() {
         loginViewModel = LoginViewModel()
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding.viewmodel = loginViewModel
-
-
     }
 
     private fun isValidated():Boolean{
         if(binding.edtEmail.text.toString().isEmpty()){
             binding.edtEmail.setError("Please enter email address")
+            binding.btnLogin.shakeButton()
             return false
         }else if(binding.edtPassword.text.toString().isEmpty()){
             binding.edtPassword.setError("Please enter your password")
+            binding.btnLogin.shakeButton()
+
             return false
         }else{
             return true

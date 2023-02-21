@@ -71,6 +71,12 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
                     i.data = Uri.parse(url)
                     startActivity(i)
                 }
+                R.id.viewAddress ->{
+                    val intentViewAddress =Intent(this@DashboardActivity, ViewAddressActivity::class.java)
+                    startActivity(intentViewAddress)
+
+
+                }
             }
 
             true

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.CycleInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -55,7 +57,12 @@ public class CustomButtonProgressBar extends RelativeLayout {
 
 
     }
-
+    public void shakeButton() {
+        TranslateAnimation anim = new TranslateAnimation(0, 50, 0, 0);
+        anim.setDuration(100);
+        anim.setInterpolator(new CycleInterpolator(2));
+        this.startAnimation(anim);
+    }
     public void hideProgress(String buttonText) {
         buttonProgress.setVisibility(INVISIBLE);
         tvButtonText.setText(buttonText);

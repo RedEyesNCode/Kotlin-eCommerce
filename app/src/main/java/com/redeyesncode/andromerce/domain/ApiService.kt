@@ -64,7 +64,11 @@ interface ApiService {
     @POST("merce/orders/place-order")
     fun  getAddressDetails(@Body orderPlaceBody:OrderPlaceBody):Call<CommonResponseModel>
 
+    @POST("merce/user/updateAddress")
+    fun updateUserAddress(@Body updateAddressBody: UpdateAddressBody): Call<CommonResponseModel>
 
+    @POST("merce/user/deleteAddress")
+    fun deleteAddress(@Body hashMap: HashMap<String, String>): Call<CommonResponseModel>
 
 
 }
