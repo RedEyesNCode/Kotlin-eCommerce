@@ -52,6 +52,9 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
         binding.topAppBar.setNavigationOnClickListener {
             showPopupMenu(it)
         }
+        binding.tvViewAllProducts.setOnClickListener {
+            startActivity(Intent(this@DashboardActivity,AllProductsActivity::class.java))
+        }
         binding.topAppBar.setOnMenuItemClickListener(androidx.appcompat.widget.Toolbar.OnMenuItemClickListener { item: MenuItem? ->
 
             when (item!!.itemId) {

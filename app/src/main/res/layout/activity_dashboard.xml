@@ -207,7 +207,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:id="@+id/tvViewAllSellers"
                         android:text="View All"
-                        android:textColor="@color/pink"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -253,7 +253,8 @@
                             android:layout_alignParentEnd="true"
                             android:fontFamily="@font/lato_bold"
                             android:text="View All"
-                            android:textColor="@color/pink"
+                            android:id="@+id/tvViewAllProducts"
+                            android:textColor="@color/black"
                             android:textSize="@dimen/_10ssp" />
 
                     </RelativeLayout>
@@ -293,7 +294,7 @@
                         android:fontFamily="@font/lato_bold"
                         android:id="@+id/tvOtherCategories"
                         android:text="View All"
-                        android:textColor="@color/pink"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp" />
 
                     <androidx.recyclerview.widget.RecyclerView

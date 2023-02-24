@@ -36,4 +36,7 @@ class MainRepository {
 
     suspend fun deleteUserAddress(hashMap: HashMap<String, String>) = AndroidClient().apiInterface.deleteAddress(hashMap)
     suspend fun addAddress(addAddressBody: AddAddressBody) = AndroidClient().apiInterface.addUserAddrress(addAddressBody)
+
+
+    suspend fun getAllProductDetails() = AndroidClient().apiInterface.getAllProductDetails()
 }

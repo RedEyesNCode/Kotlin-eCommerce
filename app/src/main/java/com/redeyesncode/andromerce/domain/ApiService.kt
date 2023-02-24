@@ -34,6 +34,9 @@ interface ApiService {
     @POST("merce/product/getAllProducts")
     fun getAllProducts():Call<GetAllProductsResponseModel>
 
+    @GET("merce/product/getAllProductsDetails")
+    fun getAllProductDetails():Call<PopularProductResponse>
+
 
     @GET("merce/product/getAllCategory")
     fun getAllCategory():Call<CategoryResponseModel>
