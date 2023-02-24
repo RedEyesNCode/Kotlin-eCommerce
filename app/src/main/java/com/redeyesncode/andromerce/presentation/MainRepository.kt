@@ -5,12 +5,14 @@ import com.redeyesncode.andromerce.data.SignupUserBody
 import com.redeyesncode.andromerce.data.UpdateAddressBody
 import com.redeyesncode.andromerce.domain.AndroidClient
 import retrofit2.http.Body
-import java.util.HashMap
+import kotlin.collections.HashMap
 
 class MainRepository {
     suspend fun getAllCategory() = AndroidClient().apiInterface.getAllCategory()
 
     suspend fun getAllProducts() = AndroidClient().apiInterface.getAllProducts()
+
+    suspend fun getAllProductForCategory(map:HashMap<String,String>) = AndroidClient().apiInterface.getProductsByCategory(map)
 
 
     suspend fun getAllSubcategory() = AndroidClient().apiInterface.getAllSubCategory()

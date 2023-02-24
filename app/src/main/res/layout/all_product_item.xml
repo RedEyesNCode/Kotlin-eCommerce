@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    <com.google.android.material.card.MaterialCardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         app:cardUseCompatPadding="true"
         app:cardCornerRadius="@dimen/_5sdp"
@@ -13,6 +13,7 @@
         android:layout_height="wrap_content">
         <RelativeLayout
             android:layout_width="match_parent"
+            android:id="@+id/mainLayout"
             android:orientation="vertical"
             android:layout_marginHorizontal="@dimen/_9sdp"
             android:paddingVertical="@dimen/_12sdp"
@@ -38,6 +39,8 @@
                     android:fontFamily="@font/lato_bold"
                     android:gravity="center"
                     android:id="@+id/tvProductName"
+                    android:maxLines="2"
+
                     android:lineSpacingExtra="@dimen/_7sdp"
                     android:text="Product Name"
                     android:textColor="@color/black"
@@ -90,7 +93,7 @@
 
 
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
 
 

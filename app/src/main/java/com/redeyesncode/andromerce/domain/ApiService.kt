@@ -56,7 +56,7 @@ interface ApiService {
 
 
     @POST("merce/product/getProductsByCategory")
-    fun getProductsByCategory():Call<CategoryProductsResponse>
+    fun getProductsByCategory(@Body map:HashMap<String,String>):Call<PopularProductResponse>
 
 
 

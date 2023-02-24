@@ -10,4 +10,7 @@
     <string name="view_addresses">View Addresses</string>
     <string name="logout">Logout</string>
     <string name="address">Address</string>
+    <string name="filter_by_category">Filter By Category</string>
+    <string name="clear">Clear</string>
+    <string name="filter">Filter</string>
 </resources>
