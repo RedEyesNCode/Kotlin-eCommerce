@@ -129,8 +129,6 @@ class AllProductsActivity : BaseActivity(),CategoryListAdapter.onEvent ,AllProdu
     private fun setupAdapter(it: PopularProductResponse?) {
         binding.recvAllProducts.adapter = AllProductAdapter(this@AllProductsActivity,it!!,this)
         binding.recvAllProducts.layoutManager = GridLayoutManager(this,2)
-
-
     }
 
     private fun setupViewModel() {
