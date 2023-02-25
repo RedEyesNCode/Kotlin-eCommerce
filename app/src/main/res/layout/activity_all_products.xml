@@ -13,8 +13,17 @@
     android:orientation="vertical"
     android:background="@drawable/ic_splash_bg"
     tools:context=".ui.AllProductsActivity">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/commonTitleBar"
+        layout="@layout/common_title_bar"/>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:layout_below="@id/commonTitleBar"
         android:id="@+id/recvAllProducts"
         tools:listitem="@layout/all_product_item"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

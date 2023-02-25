@@ -40,9 +40,9 @@ class AllProductsActivity : BaseActivity(),CategoryListAdapter.onEvent ,AllProdu
             if(bottomSheetDialog!=null){
                 bottomSheetDialog.show()
             }
-
-
         }
+        binding.commonTitleBar.tvTitle.text = "All Products"
+        binding.commonTitleBar.backIcon.setOnClickListener { finish() }
     }
 
     override fun onProductClick(position: Int, productId: String) {
