@@ -2,15 +2,18 @@ package com.redeyesncode.andromerce.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.redeyesncode.andromerce.R
 import com.redeyesncode.andromerce.data.UserAddressResponseModel
 import com.redeyesncode.andromerce.databinding.AddressItemBinding
 
-class AddressAdapter(var context: Context,var onEventAct:onEventAddress,var data:ArrayList<UserAddressResponseModel.Data>):RecyclerView.Adapter<AddressAdapter.MyViewholder>() {
+class AddressAdapter(var context: Context,var onEventAct:onEventAddress,var data:ArrayList<UserAddressResponseModel.Data>,var isCrud:Boolean):RecyclerView.Adapter<AddressAdapter.MyViewholder>() {
 
     lateinit var binding: AddressItemBinding
 
+    var selected_position = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
 
@@ -26,9 +29,31 @@ class AddressAdapter(var context: Context,var onEventAct:onEventAddress,var data
         holder.binding.tvCity.text = "City : "+data.get(position).city
         holder.binding.tvPostalCode.text = "Postal Code : "+data.get(position).postalCode
 
+        if (position == selected_position) {
+            holder.binding.rbtnAddress.isChecked = true
+        } else {
+            holder.binding.rbtnAddress.isChecked = false
+        }
+        holder.binding.rbtnAddress.setOnClickListener {
+            onEventAct.onSelectAddress(position,data.get(position).id!!.toInt())
+
+            selected_position = position
+            notifyDataSetChanged()
+
+
+        }
 
         holder.binding.tvMobileNumber.text = "Mobile Number : "+data.get(position).telephone
 
+        if(isCrud){
+            holder.binding.ivEdit.visibility = View.VISIBLE
+            holder.binding.ivDelete.visibility = View.VISIBLE
+
+
+        }else{
+            holder.binding.ivEdit.visibility = View.GONE
+            holder.binding.ivDelete.visibility = View.GONE
+        }
 
         holder.binding.ivDelete.setOnClickListener {
             onEventAct.onDeleteClick(position, data.get(position).id!!)
@@ -51,6 +76,8 @@ class AddressAdapter(var context: Context,var onEventAct:onEventAddress,var data
 
         fun onDeleteClick(position: Int,addressId:Int)
         fun onEditClick(position: Int,data :UserAddressResponseModel.Data)
+
+        fun onSelectAddress(position: Int,addressId: Int)
 
     }
 

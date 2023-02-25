@@ -1,6 +1,7 @@
 package com.redeyesncode.andromerce.ui
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -45,6 +46,10 @@ class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress, Pro
         showLog("onEditClick")
     }
 
+    override fun onSelectAddress(position: Int, addressId: Int) {
+        showLog("onSelectAddress")
+    }
+
     private lateinit var addressAdapter: AddressAdapter
 
 
@@ -58,7 +63,7 @@ class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress, Pro
         setupViewModel()
         attachObservers()
         initialApiCallandGetData()
-        addressAdapter = AddressAdapter(this@ProductDetailActivity,this,data)
+        addressAdapter = AddressAdapter(this@ProductDetailActivity,this,data,false)
 
         setContentView(binding.root)
     }
@@ -67,6 +72,15 @@ class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress, Pro
         binding.commonTitleBar.tvTitle.text = "Product Details"
         binding.commonTitleBar.backIcon.setOnClickListener { finish() }
 
+        binding.btnAddToCart.setOnClickListener {
+            var orderPlaceintent = Intent(this@ProductDetailActivity,CartAddressActivity::class.java)
+            orderPlaceintent.putExtra("PRODUCT_ID",intent.getStringExtra("PRODUCT_ID"))
+
+            startActivity(orderPlaceintent)
+
+
+
+        }
     }
 
     private fun showPlaceOrderSheet() {
@@ -124,7 +138,7 @@ class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress, Pro
             hideLoader()
             // update the recyclerview
             if(it.data.size!=0){
-                addressAdapter = AddressAdapter(this@ProductDetailActivity,this,it.data)
+                addressAdapter = AddressAdapter(this@ProductDetailActivity,this,it.data,false)
                 addressAdapter.notifyDataSetChanged()
 
             }else {

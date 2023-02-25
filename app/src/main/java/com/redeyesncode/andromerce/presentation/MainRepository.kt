@@ -1,6 +1,7 @@
 package com.redeyesncode.andromerce.presentation
 
 import com.redeyesncode.andromerce.data.AddAddressBody
+import com.redeyesncode.andromerce.data.OrderPlaceBody
 import com.redeyesncode.andromerce.data.SignupUserBody
 import com.redeyesncode.andromerce.data.UpdateAddressBody
 import com.redeyesncode.andromerce.domain.AndroidClient
@@ -17,7 +18,7 @@ class MainRepository {
 
     suspend fun insertFcm(map: HashMap<String, String>) = AndroidClient().apiInterface.insertFcmToken(map)
 
-
+    suspend fun placeOrder(map: OrderPlaceBody) = AndroidClient().apiInterface.placeOrder(map)
     suspend fun getAllSubcategory() = AndroidClient().apiInterface.getAllSubCategory()
 
     suspend fun getAllBanners() = AndroidClient().apiInterface.getAllBanners()

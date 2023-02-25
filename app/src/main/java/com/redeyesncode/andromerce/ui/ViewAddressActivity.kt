@@ -181,7 +181,7 @@ class ViewAddressActivity : BaseActivity(), AddressAdapter.onEventAddress {
     }
 
     private fun setupAddressAdapter(it: UserAddressResponseModel?) {
-        binding.recvAddress.adapter = AddressAdapter(this@ViewAddressActivity,this,it!!.data)
+        binding.recvAddress.adapter = AddressAdapter(this@ViewAddressActivity,this,it!!.data,true)
         binding.recvAddress.layoutManager = LinearLayoutManager(this@ViewAddressActivity,LinearLayoutManager.VERTICAL,false)
     }
 
@@ -221,11 +221,18 @@ class ViewAddressActivity : BaseActivity(), AddressAdapter.onEventAddress {
 
     }
 
+    override fun onSelectAddress(position: Int, addressId: Int) {
+        showLog("onSelectAddress")
+    }
+
     private fun initClicks() {
         binding.fabAddAddress.setOnClickListener {
             setupBottomSheetDialog(false,null)
         }
-
+        binding.commonTitleBar.tvTitle.text = "My Saved Address"
+        binding.commonTitleBar.backIcon.setOnClickListener {
+            finish()
+        }
 
 
     }

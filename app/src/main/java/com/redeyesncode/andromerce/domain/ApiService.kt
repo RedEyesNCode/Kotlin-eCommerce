@@ -67,7 +67,7 @@ interface ApiService {
     fun getPopularProducts():Call<PopularProductResponse>
 
     @POST("merce/orders/place-order")
-    fun  getAddressDetails(@Body orderPlaceBody:OrderPlaceBody):Call<CommonResponseModel>
+    fun  placeOrder(@Body orderPlaceBody:OrderPlaceBody):Call<CommonResponseModel>
 
     @POST("merce/user/updateAddress")
     fun updateUserAddress(@Body updateAddressBody: UpdateAddressBody): Call<CommonResponseModel>

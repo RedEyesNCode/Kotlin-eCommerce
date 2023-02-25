@@ -13,10 +13,17 @@
     android:background="@color/white"
     android:layout_height="wrap_content"
     tools:context=".ui.ViewAddressActivity">
+    <include
+        android:id="@+id/commonTitleBar"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/common_title_bar"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
         android:id="@+id/recvAddress"
+        android:layout_below="@id/commonTitleBar"
         android:layout_centerHorizontal="true"
         tools:itemCount="4"
         tools:listitem="@layout/address_item"

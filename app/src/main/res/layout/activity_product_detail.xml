@@ -186,7 +186,7 @@
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Add To Cart"
+        android:text="Place Order Inquiry."
         android:textAllCaps="false"
         android:id="@+id/btnAddToCart"
         android:textColor="@android:color/white"
