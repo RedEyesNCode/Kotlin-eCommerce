@@ -51,6 +51,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.5'
+    implementation 'com.google.firebase:firebase-messaging:23.1.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -103,6 +104,10 @@ dependencies {
 
 
     implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx' // kotlin
+
+    // PERMISSION FOR NOTIFICATION AND OTHER
+    implementation 'com.github.fondesa:kpermissions:3.4.0'
+
 
 
 }

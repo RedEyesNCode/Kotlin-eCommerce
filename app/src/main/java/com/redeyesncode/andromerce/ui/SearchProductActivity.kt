@@ -86,7 +86,7 @@ class SearchProductActivity : BaseActivity(), SearchAdapter.onEvent {
         binding.backIcon.setOnClickListener { finish() }
 
         binding.searchView.setOnSearchClickListener {
-            showToast("Search click")
+            showLog("Search click")
         }
         binding.searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
 

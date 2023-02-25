@@ -1,10 +1,16 @@
 package com.redeyesncode.andromerce.ui
 
+import android.Manifest
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import androidx.lifecycle.ViewModelProvider
+import com.fondesa.kpermissions.anyGranted
+import com.fondesa.kpermissions.extension.permissionsBuilder
+import com.fondesa.kpermissions.extension.send
+import com.google.firebase.messaging.FirebaseMessaging
 import com.redeyesncode.andromerce.base.BaseActivity
 import com.redeyesncode.andromerce.databinding.ActivityLoginBinding
 import com.redeyesncode.andromerce.presentation.LoginViewModel
@@ -23,8 +29,35 @@ class LoginActivity : BaseActivity() {
         initClicks()
         setupViewModel()
         attachObservers()
-
+        checkPermissions()
         setContentView(binding.root)
+    }
+
+    fun checkPermissions() {
+        permissionsBuilder(
+            Manifest.permission.POST_NOTIFICATIONS,
+        ).build().send {
+
+            if (it.anyGranted()) {
+                getFCMandInsert()
+            }else{
+                showLog("Unable to send notifications")
+
+            }
+
+        }
+
+    }
+
+    private fun getFCMandInsert() {
+        FirebaseMessaging.getInstance().token.addOnSuccessListener {
+            val map = HashMap<String,String>()
+            map.put("fcmToken",it)
+            map.put("userName",Build.BRAND)
+            loginViewModel.insertFcmToken(map)
+        }
+
+
     }
 
     private fun attachObservers() {
