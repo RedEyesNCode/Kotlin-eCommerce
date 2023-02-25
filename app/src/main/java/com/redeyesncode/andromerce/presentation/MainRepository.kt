@@ -13,7 +13,7 @@ class MainRepository {
     suspend fun getAllProducts() = AndroidClient().apiInterface.getAllProducts()
 
     suspend fun getAllProductForCategory(map:HashMap<String,String>) = AndroidClient().apiInterface.getProductsByCategory(map)
-
+    suspend fun searchProduct(map: HashMap<String, String>) = AndroidClient().apiInterface.searchProduct(map)
 
     suspend fun getAllSubcategory() = AndroidClient().apiInterface.getAllSubCategory()
 

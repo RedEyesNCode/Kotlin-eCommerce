@@ -7,7 +7,7 @@ data class GetAllProductsResponseModel(  @SerializedName("data" ) var data : Arr
     data class Data (
 
         @SerializedName("id"             ) var id            : Int?    = null,
-        @SerializedName("name"           ) var name          : String? = null,
+        @SerializedName("productName"           ) var name          : String? = null,
         @SerializedName("description"    ) var description   : String? = null,
         @SerializedName("category_id"    ) var categoryId    : Int?    = null,
         @SerializedName("subCategory_id" ) var subCategoryId : Int?    = null,

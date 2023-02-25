@@ -34,6 +34,7 @@
             android:fontFamily="@font/lato_bold"
             android:gravity="center"
             android:textColor="@color/white"
+            android:id="@+id/tvTitle"
             android:textSize="@dimen/_12sdp"/>
     </RelativeLayout>
 

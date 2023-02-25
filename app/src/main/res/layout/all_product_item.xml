@@ -19,12 +19,14 @@
             android:paddingVertical="@dimen/_12sdp"
             android:layout_height="wrap_content">
             <com.makeramen.roundedimageview.RoundedImageView
-                android:layout_width="@dimen/_75sdp"
+                android:layout_width="match_parent"
                 app:riv_corner_radius="@dimen/_8sdp"
+
                 android:layout_centerHorizontal="true"
                 android:id="@+id/ivProductImage"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_placeholder"
-                android:layout_height="@dimen/_75sdp"/>
+                android:layout_height="@dimen/_125sdp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_below="@id/ivProductImage"
@@ -39,24 +41,24 @@
                     android:fontFamily="@font/lato_bold"
                     android:gravity="center"
                     android:id="@+id/tvProductName"
-                    android:maxLines="2"
-
+                    android:maxLines="1"
                     android:lineSpacingExtra="@dimen/_7sdp"
                     android:text="Product Name"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15sdp">
+                    android:textSize="@dimen/_10sdp">
                 </TextView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/lato_bold"
                     android:gravity="start"
+                    android:textStyle="bold"
                     android:id="@+id/tvProductPrice"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:lineSpacingExtra="@dimen/_7sdp"
                     android:text="Product Price"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_11sdp">
+                    android:textSize="@dimen/_14sdp">
 
                 </TextView>
                 <TextView
@@ -66,6 +68,7 @@
                     android:gravity="start"
                     android:id="@+id/tvCategoryName"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:visibility="gone"
                     android:lineSpacingExtra="@dimen/_7sdp"
                     android:text="Category Name"
                     android:textColor="@color/black"
@@ -78,6 +81,7 @@
                 android:layout_width="@dimen/_25sdp"
                 android:src="@drawable/ic_forward"
                 android:tint="@color/pink"
+                android:visibility="gone"
                 android:layout_height="@dimen/_25sdp"/>
 
 

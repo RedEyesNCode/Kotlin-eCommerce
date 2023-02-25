@@ -3,13 +3,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_marginVertical="@dimen/_6sdp"
+    android:layout_marginHorizontal="@dimen/_12sdp"
     android:layout_height="wrap_content">
     <TextView
         android:layout_width="wrap_content"
+        android:maxLines="1"
         android:text="CategoryName"
-        android:buttonTint="@color/pink"
         android:textSize="@dimen/_15sdp"
         android:fontFamily="@font/lato_regular"
+        android:textColor="@color/black"
         android:id="@+id/rbtnCategory"
         android:layout_height="wrap_content"/>
 

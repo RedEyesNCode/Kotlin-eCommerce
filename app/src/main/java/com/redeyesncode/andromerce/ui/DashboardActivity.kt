@@ -52,6 +52,9 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
         binding.topAppBar.setNavigationOnClickListener {
             showPopupMenu(it)
         }
+
+
+
         binding.tvViewAllProducts.setOnClickListener {
             startActivity(Intent(this@DashboardActivity,AllProductsActivity::class.java))
         }
@@ -78,6 +81,12 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
                     val intentViewAddress =Intent(this@DashboardActivity, ViewAddressActivity::class.java)
                     startActivity(intentViewAddress)
 
+
+                }
+                R.id.searchMenu ->{
+
+                    val IntentSearch = Intent(this@DashboardActivity,SearchProductActivity::class.java)
+                    startActivity(IntentSearch)
 
                 }
             }
