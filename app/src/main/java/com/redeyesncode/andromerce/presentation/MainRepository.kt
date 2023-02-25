@@ -15,6 +15,9 @@ class MainRepository {
     suspend fun getAllProductForCategory(map:HashMap<String,String>) = AndroidClient().apiInterface.getProductsByCategory(map)
     suspend fun searchProduct(map: HashMap<String, String>) = AndroidClient().apiInterface.searchProduct(map)
 
+    suspend fun insertFcm(map: HashMap<String, String>) = AndroidClient().apiInterface.insertFcmToken(map)
+
+
     suspend fun getAllSubcategory() = AndroidClient().apiInterface.getAllSubCategory()
 
     suspend fun getAllBanners() = AndroidClient().apiInterface.getAllBanners()

@@ -76,4 +76,8 @@ interface ApiService {
     fun deleteAddress(@Body hashMap: HashMap<String, String>): Call<CommonResponseModel>
 
 
+    @POST("merce/notifications/fcm")
+    fun insertFcmToken(@Body hashMap: HashMap<String, String>):Call<CommonResponseModel>
+
+
 }

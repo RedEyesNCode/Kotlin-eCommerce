@@ -31,6 +31,59 @@ class LoginViewModel() :ViewModel() {
     val loginResponse:LiveData<LoginUserResponse> = _loginResponse
 
 
+
+    fun insertFcmToken(map:HashMap<String,String>) = viewModelScope.launch {
+
+        insertFcmTokenCoroutine(map)
+
+
+    }
+
+    private suspend fun insertFcmTokenCoroutine(map: java.util.HashMap<String, String>) {
+
+        try {
+
+            val response = mainRepo.insertFcm(map)
+            _isLoading.value = true
+            response.enqueue(object : Callback<CommonResponseModel> {
+
+                override fun onResponse(
+                    call: Call<CommonResponseModel>,
+                    response: Response<CommonResponseModel>
+                ) {
+                    _isLoading.value = false
+                    if (response.code() == 200) {
+                       _isLoading.value = false
+                    } else {
+                        _isFailed.value = "Record Not Found !."
+                    }
+                }
+
+                override fun onFailure(call: Call<CommonResponseModel>, t: Throwable) {
+                    _isFailed.value = t.message
+                }
+            })
+        } catch (t: Throwable) {
+
+            when (t) {
+                is IOException -> {
+                    _isFailed.value = "IO Exception"
+                }
+                else -> {
+                    _isFailed.value = "Exception." + t.message
+
+                    Log.i("RETROFIT", t.message!!)
+                }
+
+
+            }
+
+        }
+
+
+
+    }
+
     fun loginUser(hashMap: HashMap<String,String>) = viewModelScope.launch {
 
         loginUserCoroutine(hashMap)

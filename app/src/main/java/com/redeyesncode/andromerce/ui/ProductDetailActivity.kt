@@ -1,40 +1,52 @@
 package com.redeyesncode.andromerce.ui
 
-import android.content.Context
-import android.location.Address
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Dialog
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.tabs.TabLayoutMediator
 import com.redeyesncode.andromerce.R
 import com.redeyesncode.andromerce.base.BaseActivity
 import com.redeyesncode.andromerce.data.ProductDetailResponseModel
 import com.redeyesncode.andromerce.data.UserAddressResponseModel
 import com.redeyesncode.andromerce.databinding.ActivityProductDetailBinding
-import com.redeyesncode.andromerce.databinding.BottomSheetSelectAddressBinding
+import com.redeyesncode.andromerce.databinding.ImageDialogBinding
 import com.redeyesncode.andromerce.presentation.ProductDetailViewModel
 import com.redeyesncode.andromerce.ui.adapters.AddressAdapter
-import com.redeyesncode.andromerce.utils.AppSession
+import com.redeyesncode.andromerce.ui.adapters.ProductImageViewPager
 
-class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress {
+class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress, ProductImageViewPager.onImageEvent {
 
     private lateinit var binding:ActivityProductDetailBinding
     private lateinit var productDetailViewModel: ProductDetailViewModel
     private lateinit var bottomSheetDialog:BottomSheetDialog
     override fun onDeleteClick(position: Int, addressId: Int) {
+        // Not used
         showLog("OnDeletelClick")
     }
 
-    override fun onEditClick(position: Int, data: UserAddressResponseModel.Data) {
+    override fun onImageClick(position: Int, link: String) {
+        val dialogBinding = ImageDialogBinding.inflate(LayoutInflater.from(this@ProductDetailActivity))
+        val dialog = Dialog(this@ProductDetailActivity)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.setContentView(dialogBinding.root)
+        Glide.with(this).load(link).placeholder(R.drawable.ic_placeholder).into(dialogBinding.imageDialog)
+        dialog.show()
 
+    }
+
+    override fun onEditClick(position: Int, data: UserAddressResponseModel.Data) {
+        // Not used.
         showLog("onEditClick")
     }
 
     private lateinit var addressAdapter: AddressAdapter
+
 
     var data = ArrayList<UserAddressResponseModel.Data>()
 
@@ -52,28 +64,12 @@ class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress {
     }
 
     private fun initClicks() {
+        binding.commonTitleBar.tvTitle.text = "Product Details"
+        binding.commonTitleBar.backIcon.setOnClickListener { finish() }
 
-        binding.btnPlaceOrder.setOnClickListener {
-            showPlaceOrderSheet()
-        }
     }
 
     private fun showPlaceOrderSheet() {
-        val bottomSheetBinding  = BottomSheetSelectAddressBinding.inflate(LayoutInflater.from(this@ProductDetailActivity))
-        bottomSheetDialog = BottomSheetDialog(this,R.style.BottomSheetDialogTheme)
-
-        bottomSheetDialog.setContentView(bottomSheetBinding.root)
-        bottomSheetDialog.show()
-        val hashMap = HashMap<String,String>()
-        showLoader()
-        hashMap.put("user_id", AppSession(this@ProductDetailActivity).getUser()?.id.toString())
-
-
-
-        bottomSheetBinding.recvAddress.adapter = addressAdapter
-        bottomSheetBinding.recvAddress.layoutManager = LinearLayoutManager(this@ProductDetailActivity,LinearLayoutManager.VERTICAL,false)
-
-        bottomSheetBinding.btnPlaceOrder.setTvButtonText("Place Order")
 
 
     }
@@ -85,7 +81,7 @@ class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress {
         hashMap.put("product_id",productId.toString())
         showLoader()
         productDetailViewModel.getProductDetail(hashMap)
-        productDetailViewModel.getUserAddress(hashMap)
+//        productDetailViewModel.getUserAddress(hashMap)
 
 
 
@@ -118,7 +114,6 @@ class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress {
 
         productDetailViewModel.productDetailResponse.observe((this)){
             hideLoader()
-            showToast("Got the Response.")
             updateUi(it)
 
 
@@ -142,14 +137,29 @@ class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress {
     }
 
     private fun updateUi(it: ProductDetailResponseModel?) {
-        binding.productName.text = it?.productTable?.productName
-        binding.productDescription.text = it?.productTable?.description
-        binding.tvSellingPrice.text = it?.productTable?.sellingPrice
-        binding.tvMaxPrice.text = it?.productTable?.maxPrice
+        binding.tvProductName.text = it?.productTable?.productName
+        binding.tvDescription.text = it?.productTable?.description
+        binding.tvMaxPrice.text = "${it?.productTable?.maxPrice}"
+        binding.tvRealPrice.text = "₹ ${it?.productTable?.sellingPrice}"
+        binding.tvMaxPrice.setPaintFlags(binding.tvMaxPrice.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG)
 
-        Glide.with(this).load(it?.media?.get(0)?.link).placeholder(R.drawable.ic_placeholder).into(binding.ivMainImage)
-        Glide.with(this).load(it?.category?.image).placeholder(R.drawable.ic_placeholder).into(binding.ivCategory)
-        Glide.with(this).load(it?.subcategory?.image).placeholder(R.drawable.ic_placeholder).into(binding.ivSubCategory)
+
+
+
+        binding.viewPagerProductImages.adapter =ProductImageViewPager(this,it!!.media,this)
+        binding.viewPagerProductImages.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        for (index in it.media){
+            binding.tabsProductImage.addTab(binding.tabsProductImage.newTab())
+        }
+
+        TabLayoutMediator(binding.tabsProductImage, binding.viewPagerProductImages) { tab, position ->
+            binding.tabsProductImage.selectTab(tab)
+        }.attach()
+
+
+
+        binding.viewPagerProductImages.currentItem = 0
 
     }
 }
