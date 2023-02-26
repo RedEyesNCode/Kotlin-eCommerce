@@ -61,9 +61,6 @@ class AllProductsActivity : BaseActivity(),CategoryListAdapter.onEvent ,AllProdu
             hashMap.put("category_id",categoryId)
             allProductsViewModel.getProductByCategory(hashMap)
         }
-
-
-
     }
 
     private fun initialApiCall() {

@@ -49,7 +49,7 @@ class SignupViewModel(): ViewModel() {
                     response: Response<CommonResponseModel>
                 ) {
                     _isLoading.value = false
-                    if (response.code() == 200) {
+                    if (response.code() == 200 || response.code()==400) {
                         _commonResponseCheckUser.postValue(response.body())
                     } else {
                         if(response.code()==500){
