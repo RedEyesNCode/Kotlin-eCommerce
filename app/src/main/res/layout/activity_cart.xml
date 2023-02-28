@@ -19,6 +19,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/common_title_bar"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_above="@id/btnAddToCart"
+        android:src="@drawable/ic_no_cart"
+        android:padding="@dimen/_65sdp"
+        android:visibility="gone"
+        android:id="@+id/ivNoCart"
+        android:layout_below="@id/commonTitleBar"
+        android:layout_height="match_parent"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

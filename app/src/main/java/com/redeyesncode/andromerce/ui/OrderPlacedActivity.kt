@@ -21,12 +21,12 @@ class OrderPlacedActivity : BaseActivity() {
 
     private fun initClicks() {
         binding.btnLogin.setTvButtonText("Thanks for Ordering \n Please wait !")
-        binding.btnLogin.showProgress("Thanks for Ordering \n Please wait !")
+        binding.btnLogin.showProgress("Thanks ! \nWe will connect with you soon !")
         Handler().postDelayed(Runnable {
             val intentDashboard = Intent(this@OrderPlacedActivity, DashboardActivity::class.java)
             intentDashboard.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intentDashboard)
-        },3000)
+        },5000)
 
     }
 }

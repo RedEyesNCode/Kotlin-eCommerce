@@ -3,6 +3,7 @@ package com.redeyesncode.andromerce.ui
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.redeyesncode.andromerce.base.BaseActivity
@@ -77,6 +78,7 @@ class CartActivity : BaseActivity(),CartAdapter.onEvent {
         viewModel.isFailed.observe((this)){
             hideLoader()
             if(it!=null){
+                binding.ivNoCart.visibility = View.VISIBLE
                 showToast(it)
             }
         }
@@ -92,6 +94,8 @@ class CartActivity : BaseActivity(),CartAdapter.onEvent {
             if(it!=null){
 
                 setAdapter(it.data)
+                binding.ivNoCart.visibility = View.GONE
+                binding.recvCart.visibility = View.VISIBLE
 
             }else{
                 showToast(Constant.OOPS_SW)

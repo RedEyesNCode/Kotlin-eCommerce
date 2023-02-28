@@ -77,7 +77,7 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent,SubCatego
             subCategoryIntent.putExtra("ADAPTER_NUMBER",2)
             startActivity(subCategoryIntent)
         }
-        binding.topAppBar.setOnMenuItemClickListener(androidx.appcompat.widget.Toolbar.OnMenuItemClickListener { item: MenuItem? ->
+        binding.topAppBar.setOnMenuItemClickListener({ item: MenuItem? ->
 
             when (item!!.itemId) {
                 R.id.logoutMenu -> {
