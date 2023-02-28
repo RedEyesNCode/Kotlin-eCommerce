@@ -45,4 +45,13 @@ class MainRepository {
 
 
     suspend fun getAllProductDetails() = AndroidClient().apiInterface.getAllProductDetails()
+
+
+    suspend fun getCart(hashMap: HashMap<String, String>) = AndroidClient().apiInterface.getCart(hashMap)
+
+
+    suspend fun addToCart(hashMap: HashMap<String, String>) = AndroidClient().apiInterface.addToCart(hashMap)
+
+    suspend fun deleteCart(hashMap: HashMap<String, String>) = AndroidClient().apiInterface.deleteCart(hashMap)
+
 }

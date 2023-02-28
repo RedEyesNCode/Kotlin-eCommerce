@@ -79,5 +79,17 @@ interface ApiService {
     @POST("merce/notifications/fcm")
     fun insertFcmToken(@Body hashMap: HashMap<String, String>):Call<CommonResponseModel>
 
+    // Cart api's are placed here.
+
+
+    @POST("merce/cart/user")
+    fun getCart(@Body hashMap: HashMap<String, String>):Call<CartResponseData>
+
+    @POST("merce/cart/add-to-cart") // this api will perform both the operation add to Cart and Update Cart.
+    fun addToCart(@Body hashMap: HashMap<String, String>):Call<CartResponseData>
+
+
+    @POST("merce/cart/delete-cart-item")
+    fun deleteCart(@Body hashMap: HashMap<String, String>):Call<CommonResponseModel>
 
 }

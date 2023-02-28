@@ -89,6 +89,12 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
                     startActivity(IntentSearch)
 
                 }
+                R.id.myProfile->{
+                    val cartIntent = Intent(this@DashboardActivity,CartActivity::class.java)
+                    startActivity(cartIntent)
+
+
+                }
             }
 
             true

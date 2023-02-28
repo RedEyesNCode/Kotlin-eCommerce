@@ -110,9 +110,16 @@ class CartAddressActivity : BaseActivity(), AddressAdapter.onEventAddress {
                 val orderPlaceBody = OrderPlaceBody()
                 orderPlaceBody.addressId = addressIdActivity
                 orderPlaceBody.userId =  AppSession(this@CartAddressActivity).getUser()?.id
-                orderPlaceBody.productId = intent.getStringExtra("PRODUCT_ID")?.toInt()
-                showLoader()
-                viewModel.placeOrder(orderPlaceBody)
+
+                val productsIds = intent.getIntegerArrayListExtra("PRODUCT_IDS")
+                if (productsIds != null) {
+                    for (ids in productsIds){
+                        orderPlaceBody.productId = ids
+                        viewModel.placeOrder(orderPlaceBody)
+
+                    }
+                }
+                // Will not call as multiple calls will happen
 
             }
         }

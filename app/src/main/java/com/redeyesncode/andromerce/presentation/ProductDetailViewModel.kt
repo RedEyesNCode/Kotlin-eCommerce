@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.redeyesncode.andromerce.data.PopularProductResponse
+import com.redeyesncode.andromerce.data.CartResponseData
 import com.redeyesncode.andromerce.data.ProductDetailResponseModel
 import com.redeyesncode.andromerce.data.UserAddressResponseModel
 import kotlinx.coroutines.launch
@@ -24,6 +24,60 @@ class ProductDetailViewModel():ViewModel() {
     private val _productDetailResponseModel = MutableLiveData<ProductDetailResponseModel>()
 
     val productDetailResponse :LiveData<ProductDetailResponseModel> = _productDetailResponseModel
+
+    private val _cartResponse = MutableLiveData<CartResponseData>()
+    val cartResponse :LiveData<CartResponseData> = _cartResponse
+
+
+    fun addToCart(hashMap: HashMap<String,String>) = viewModelScope.launch {
+
+        addToCartCoroutine(hashMap)
+
+    }
+
+    private suspend fun addToCartCoroutine(hashMap: java.util.HashMap<String, String>) {
+
+        try {
+
+            val response = mainRepo.addToCart(hashMap)
+            _isLoading.value = true
+            response.enqueue(object : Callback<CartResponseData> {
+
+                override fun onResponse(
+                    call: Call<CartResponseData>,
+                    response: Response<CartResponseData>
+                ) {
+                    _isLoading.value = false
+                    if (response.code() == 200) {
+                        _cartResponse.postValue(response.body())
+                    } else {
+                        _isFailed.value = "Record Not Found !."
+                    }
+                }
+
+                override fun onFailure(call: Call<CartResponseData>, t: Throwable) {
+                    _isFailed.value = t.message
+                }
+            })
+        } catch (t: Throwable) {
+
+            when (t) {
+                is IOException -> {
+                    _isFailed.value = "IO Exception"
+                }
+                else -> {
+                    _isFailed.value = "Exception." + t.message
+
+                    Log.i("RETROFIT", t.message!!)
+                }
+
+
+            }
+
+        }
+
+
+    }
 
 
     var mainRepo: MainRepository = MainRepository()

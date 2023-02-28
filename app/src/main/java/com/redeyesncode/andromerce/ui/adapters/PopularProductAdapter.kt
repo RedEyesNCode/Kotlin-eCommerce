@@ -31,6 +31,7 @@ class PopularProductAdapter (var context: Context,var popularProductResponse: Po
 
         try {
             Glide.with(context).load(data.media.get(0).link).placeholder(R.drawable.ic_placeholder).into(holder.binding.imagePopularItem)
+//            Glide.with(context).load("https://cdn.zivame.com/media/mimages/home_page_banner_desktop_1400x550_27FEB_Extra150Off_MB_desk.jpg?t=1677496233").placeholder(R.drawable.ic_placeholder).into(holder.binding.imagePopularItem)
 
         }catch (e:java.lang.Exception){
             Glide.with(context).load(R.drawable.ic_placeholder).into(holder.binding.imagePopularItem)

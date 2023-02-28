@@ -19,6 +19,7 @@ import com.redeyesncode.andromerce.databinding.ImageDialogBinding
 import com.redeyesncode.andromerce.presentation.ProductDetailViewModel
 import com.redeyesncode.andromerce.ui.adapters.AddressAdapter
 import com.redeyesncode.andromerce.ui.adapters.ProductImageViewPager
+import com.redeyesncode.andromerce.utils.AppSession
 
 class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress, ProductImageViewPager.onImageEvent {
 
@@ -73,10 +74,14 @@ class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress, Pro
         binding.commonTitleBar.backIcon.setOnClickListener { finish() }
 
         binding.btnAddToCart.setOnClickListener {
-            var orderPlaceintent = Intent(this@ProductDetailActivity,CartAddressActivity::class.java)
-            orderPlaceintent.putExtra("PRODUCT_ID",intent.getStringExtra("PRODUCT_ID"))
 
-            startActivity(orderPlaceintent)
+            showLoader()
+            val map = HashMap<String,String>()
+            map.put("product_id",intent.getStringExtra("PRODUCT_ID").toString())
+            map.put("user_id", AppSession(this@ProductDetailActivity).getUser()?.id.toString())
+            map.put("quantity","1")
+            productDetailViewModel.addToCart(map)
+
 
 
 
@@ -131,6 +136,13 @@ class ProductDetailActivity : BaseActivity(), AddressAdapter.onEventAddress, Pro
             updateUi(it)
 
 
+
+        }
+        productDetailViewModel.cartResponse.observe((this)){
+            hideLoader()
+            val cartIntent = Intent(this@ProductDetailActivity,CartActivity::class.java)
+            cartIntent.putExtra("PRODUCT_ID",intent.getStringExtra("PRODUCT_ID"))
+            startActivity(cartIntent)
 
         }
 
