@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -27,7 +26,7 @@ import com.redeyesncode.andromerce.ui.adapters.PopularProductAdapter
 import com.redeyesncode.andromerce.ui.adapters.SubCategoryAdapter
 import com.redeyesncode.andromerce.utils.AppSession
 
-class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
+class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent,SubCategoryAdapter.onEventSubCateogory ,CategoryAdapter.onEventCategoryClick{
 
     private lateinit var binding:ActivityDashboardBinding
     private lateinit var dashboardViewModel:DashboardViewModel
@@ -36,6 +35,24 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
         val productDetailIntent = Intent(this@DashboardActivity,ProductDetailActivity::class.java)
         productDetailIntent.putExtra("PRODUCT_ID",productId.toString())
         startActivity(productDetailIntent)
+    }
+
+    override fun onCategoryClick(position: Int, categoryId: Int, name: String) {
+        val subCategoryIntent = Intent(this@DashboardActivity,AllProductsActivity::class.java)
+        subCategoryIntent.putExtra("ADAPTER_NUMBER",0)
+        subCategoryIntent.putExtra("ID",categoryId)
+        subCategoryIntent.putExtra("NAME",name)
+        startActivity(subCategoryIntent)
+    }
+
+    override fun onClickSubCategory(position: Int, subCategoryId: Int, name: String?) {
+        val subCategoryIntent = Intent(this@DashboardActivity,AllProductsActivity::class.java)
+        subCategoryIntent.putExtra("ADAPTER_NUMBER",2)
+        subCategoryIntent.putExtra("ID",subCategoryId)
+        subCategoryIntent.putExtra("NAME",name)
+        startActivity(subCategoryIntent)
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +73,9 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
 
 
         binding.tvViewAllProducts.setOnClickListener {
-            startActivity(Intent(this@DashboardActivity,AllProductsActivity::class.java))
+            val subCategoryIntent = Intent(this@DashboardActivity,AllProductsActivity::class.java)
+            subCategoryIntent.putExtra("ADAPTER_NUMBER",2)
+            startActivity(subCategoryIntent)
         }
         binding.topAppBar.setOnMenuItemClickListener(androidx.appcompat.widget.Toolbar.OnMenuItemClickListener { item: MenuItem? ->
 
@@ -221,7 +240,7 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
     }
 
     private fun setupOtherCategoryAdapter(it: AllSubCategoryResponse?) {
-        binding.rvSubCategory.adapter = SubCategoryAdapter(this@DashboardActivity, it!!)
+        binding.rvSubCategory.adapter = SubCategoryAdapter(this@DashboardActivity, it!!,this)
         binding.rvSubCategory.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
     }
 
@@ -252,7 +271,7 @@ class DashboardActivity : BaseActivity(),PopularProductAdapter.onEvent {
     }
 
     private fun setupCategoryAdapter(it: CategoryResponseModel?) {
-        binding.rvTopSeller.adapter = CategoryAdapter(this@DashboardActivity, it!!)
+        binding.rvTopSeller.adapter = CategoryAdapter(this@DashboardActivity, it!!,this)
         binding.rvTopSeller.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
     }
 

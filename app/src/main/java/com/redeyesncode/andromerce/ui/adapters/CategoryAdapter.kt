@@ -10,9 +10,14 @@ import com.redeyesncode.andromerce.R
 import com.redeyesncode.andromerce.data.CategoryResponseModel
 import com.redeyesncode.andromerce.databinding.RowTopSellerBinding
 
-class CategoryAdapter(var context: Context,var categoryResponseModel: CategoryResponseModel):RecyclerView.Adapter<CategoryAdapter.MyViewholder>() {
+class CategoryAdapter(var context: Context,var categoryResponseModel: CategoryResponseModel, var onEventCategory:onEventCategoryClick):RecyclerView.Adapter<CategoryAdapter.MyViewholder>() {
 
     lateinit var binding: RowTopSellerBinding
+
+    interface onEventCategoryClick{
+
+        fun onCategoryClick(position: Int,categoryId:Int,name:String)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewholder {
         binding = RowTopSellerBinding.inflate(LayoutInflater.from(context),parent,false)
@@ -23,7 +28,10 @@ class CategoryAdapter(var context: Context,var categoryResponseModel: CategoryRe
 
 
         holder.binding.tvTopSeller.setText(categoryResponseModel.data.get(position).name)
+        holder.binding.sellerDetailsLayout.setOnClickListener {
+            onEventCategory.onCategoryClick(position,categoryResponseModel.data.get(position).id!!.toInt(),categoryResponseModel.data.get(position).name.toString())
 
+        }
 
         Glide.with(context).load(categoryResponseModel.data.get(position).image).placeholder(R.drawable.ic_placeholder).into(holder.binding.imageTopSeller)
 

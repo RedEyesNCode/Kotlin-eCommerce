@@ -54,4 +54,6 @@ class MainRepository {
 
     suspend fun deleteCart(hashMap: HashMap<String, String>) = AndroidClient().apiInterface.deleteCart(hashMap)
 
+    suspend fun getProductForSubCategory(hashMap:HashMap<String,String>) = AndroidClient().apiInterface.getProductBySubCategory(hashMap)
+
 }

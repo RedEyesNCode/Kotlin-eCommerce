@@ -196,6 +196,8 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:fontFamily="@font/lato_bold"
+                        android:id="@+id/tvViewAllSellers"
+
                         android:text="Top Categories"
                         android:textColor="@color/light_black"
                         android:textSize="@dimen/_15ssp" />
@@ -205,7 +207,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:fontFamily="@font/lato_bold"
-                        android:id="@+id/tvViewAllSellers"
+                        android:visibility="gone"
                         android:text="View All"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10ssp" />
@@ -285,6 +287,8 @@
                         android:fontFamily="@font/lato_bold"
                         android:text="Other Categories"
                         android:textColor="@color/light_black"
+                        android:id="@+id/tvOtherCategories"
+
                         android:textSize="@dimen/_15ssp" />
 
                     <TextView
@@ -292,9 +296,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:fontFamily="@font/lato_bold"
-                        android:id="@+id/tvOtherCategories"
                         android:text="View All"
                         android:textColor="@color/black"
+                        android:visibility="gone"
+
                         android:textSize="@dimen/_10ssp" />
 
                     <androidx.recyclerview.widget.RecyclerView

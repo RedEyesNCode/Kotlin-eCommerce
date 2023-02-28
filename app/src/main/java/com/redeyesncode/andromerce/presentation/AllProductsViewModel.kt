@@ -36,6 +36,49 @@ class AllProductsViewModel():ViewModel() {
 
     }
 
+    fun getProductBySubCategory(hashMap: HashMap<String, String>) = viewModelScope.launch {
+        try {
+
+            val response = mainRepo.getProductForSubCategory(hashMap)
+            _isLoading.value = true
+            response.enqueue(object : Callback<PopularProductResponse> {
+
+                override fun onResponse(
+                    call: Call<PopularProductResponse>,
+                    response: Response<PopularProductResponse>
+                ) {
+                    _isLoading.value = false
+                    if (response.code() == 200) {
+                        _categoryProductsResponseModel.postValue(response.body())
+                    } else {
+                        _isFailed.value = "Record Not Found !."
+                    }
+                }
+
+                override fun onFailure(call: Call<PopularProductResponse>, t: Throwable) {
+                    _isFailed.value = t.message
+                }
+            })
+        } catch (t: Throwable) {
+
+            when (t) {
+                is IOException -> {
+                    _isFailed.value = "IO Exception"
+                }
+                else -> {
+                    _isFailed.value = "Exception." + t.message
+
+                    Log.i("RETROFIT", t.message!!)
+                }
+
+
+            }
+
+        }
+
+
+    }
+
     private suspend fun getProductsForCategoryKTX(hashMap: java.util.HashMap<String, String>) {
         try {
 

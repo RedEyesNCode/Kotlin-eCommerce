@@ -3,6 +3,7 @@ package com.redeyesncode.andromerce.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,8 +32,37 @@ class AllProductsActivity : BaseActivity(),CategoryListAdapter.onEvent ,AllProdu
         setupViewModel()
         initClicks()
         attachObservers()
-        initialApiCall()
+        getDataAndUpdateUi()
         setContentView(binding.root)
+    }
+
+    private fun getDataAndUpdateUi() {
+        bottomSheetDialog = BottomSheetDialog(this,R.style.BottomSheetDialogTheme)
+
+        val adapterNumber = intent.getIntExtra("ADAPTER_NUMBER",-1)
+        val id = intent.getIntExtra("ID",-1)
+        binding.commonTitleBar.tvTitle.text = intent.getStringExtra("NAME")
+
+        if(adapterNumber==0){
+            showLoader()
+            binding.fabFilter.visibility = View.GONE
+            val hashMap = HashMap<String,String>()
+            hashMap.put("category_id",id.toString())
+            allProductsViewModel.getProductByCategory(hashMap)
+
+        }else if(adapterNumber==1){
+            binding.fabFilter.visibility = View.VISIBLE
+            initialApiCall()
+
+        }else if(adapterNumber==2){
+            showLoader()
+            binding.fabFilter.visibility = View.GONE
+            val hashMap = HashMap<String,String>()
+            hashMap.put("subcategory_id",id.toString())
+            allProductsViewModel.getProductBySubCategory(hashMap)
+        }
+
+
     }
 
     private fun initClicks() {
@@ -104,7 +134,10 @@ class AllProductsActivity : BaseActivity(),CategoryListAdapter.onEvent ,AllProdu
             hideLoader()
             categoryNames.add(CategoryResponseModel.Data(-1,"All","",""))
             categoryNames.addAll(it.data)
+            val adapterNumber = intent.getIntExtra("ADAPTER_NUMBER",-1)
             setupBottomSheetAdapter(categoryNames)
+
+
 
 
 

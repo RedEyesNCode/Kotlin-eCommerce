@@ -28,7 +28,13 @@ class AllProductAdapter(var context: Context,var popularProductResponse: Popular
         holder.binding.tvProductName.text =data.productTable?.productName
         holder.binding.tvProductPrice.text = "Price : ${data.productTable?.sellingPrice}"
         holder.binding.tvCategoryName.text = "Category : ${data.category?.name}"
-        Glide.with(context).load(data.media.get(0).link).placeholder(R.drawable.ic_placeholder).into(holder.binding.ivProductImage)
+
+        try {
+            Glide.with(context).load(data.media.get(0).link).placeholder(R.drawable.ic_placeholder).into(holder.binding.ivProductImage)
+
+        }catch (e:java.lang.Exception){
+            holder.binding.ivProductImage.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.ic_placeholder))
+        }
 
         holder.binding.mainLayout.setOnClickListener {
             onEventActivity.onProductClick(position,data.productTable?.id.toString())
